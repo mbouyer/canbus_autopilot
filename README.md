@@ -9,3 +9,5 @@ These parts are built around a pic18f26j50, for its low power and native can sup
 There is also wxpilot, a wxwidget/socketcan utility which allows to show and change some of the autopilot's parameters from a unix computer (see my marine_charplotter repository)
 
 The display unit can also decode and display navigation PGNs sent by my nmea2000_pi OpenCPN plugin.
+
+I use this hardware for sailing since several years now
