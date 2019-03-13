@@ -1,0 +1,185 @@
+Cmp-Mod V01 Created by CvPcb (2013-dec-23)-stable date = Thu Mar  6 17:55:27 2014
+
+BeginCmp
+TimeStamp = /53061E9A;
+Reference = C1;
+ValeurCmp = 47uF;
+IdModule  = CP_5x6mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /53061E94;
+Reference = C2;
+ValeurCmp = 47uF;
+IdModule  = CP_5x6mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /53061EA0;
+Reference = C3;
+ValeurCmp = 10uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /53050736;
+Reference = C4;
+ValeurCmp = 100nF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /53050F85;
+Reference = C5;
+ValeurCmp = 100nF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /53061E74;
+Reference = C6;
+ValeurCmp = 47uF;
+IdModule  = CP_5x6mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /53089CF4;
+Reference = D1;
+ValeurCmp = DIODESCH;
+IdModule  = DO-214AC(SMA);
+EndCmp
+
+BeginCmp
+TimeStamp = /530612B1;
+Reference = E1;
+ValeurCmp = ROTARY_ENCODER;
+IdModule  = Bourns 3315Y;
+EndCmp
+
+BeginCmp
+TimeStamp = /5304BE96;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = SIL-3;
+EndCmp
+
+BeginCmp
+TimeStamp = /5308FEE2;
+Reference = P1;
+ValeurCmp = CONN_2;
+IdModule  = pilote-interco-main;
+EndCmp
+
+BeginCmp
+TimeStamp = /530735B4;
+Reference = P2;
+ValeurCmp = CONN_6;
+IdModule  = tyco-5-146132-4;
+EndCmp
+
+BeginCmp
+TimeStamp = /5304BEB4;
+Reference = P3;
+ValeurCmp = CONN_4;
+IdModule  = phoenix_1771114;
+EndCmp
+
+BeginCmp
+TimeStamp = /5304BEA5;
+Reference = P4;
+ValeurCmp = CONN_4;
+IdModule  = phoenix_1771114;
+EndCmp
+
+BeginCmp
+TimeStamp = /5307914C;
+Reference = P5;
+ValeurCmp = CONN_5;
+IdModule  = SIL-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /5308FEF1;
+Reference = P6;
+ValeurCmp = CONN_5;
+IdModule  = SIL-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /530617C1;
+Reference = R1;
+ValeurCmp = 1.5K;
+IdModule  = R7;
+EndCmp
+
+BeginCmp
+TimeStamp = /53189640;
+Reference = R2;
+ValeurCmp = 10K;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /53060D6B;
+Reference = SP1;
+ValeurCmp = PKM13EPYH4000-A0;
+IdModule  = PKM13EPYH4000-A0;
+EndCmp
+
+BeginCmp
+TimeStamp = /531629D4;
+Reference = SW1;
+ValeurCmp = SW_PUSH;
+IdModule  = ITW_47;
+EndCmp
+
+BeginCmp
+TimeStamp = /531629DA;
+Reference = SW2;
+ValeurCmp = SW_PUSH;
+IdModule  = ITW_47;
+EndCmp
+
+BeginCmp
+TimeStamp = /531629FB;
+Reference = SW3;
+ValeurCmp = SW_PUSH;
+IdModule  = ITW_47;
+EndCmp
+
+BeginCmp
+TimeStamp = /531629C7;
+Reference = SW4;
+ValeurCmp = SW_PUSH;
+IdModule  = ITW_47;
+EndCmp
+
+BeginCmp
+TimeStamp = /530501DE;
+Reference = U1;
+ValeurCmp = UA78M05;
+IdModule  = SOT223;
+EndCmp
+
+BeginCmp
+TimeStamp = /530501ED;
+Reference = U2;
+ValeurCmp = UA78M33;
+IdModule  = SOT223;
+EndCmp
+
+BeginCmp
+TimeStamp = /530500AA;
+Reference = U3;
+ValeurCmp = PIC18F2XK80;
+IdModule  = microchip-pic18fxx5x-SO-28W;
+EndCmp
+
+BeginCmp
+TimeStamp = /5304EBA3;
+Reference = U4;
+ValeurCmp = MCP2562;
+IdModule  = SOIC-8_N;
+EndCmp
+
+EndListe

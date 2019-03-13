@@ -1,0 +1,87 @@
+update=26 janvier 2016 11:50:05 MET
+version=1
+last_client=eeschema
+[general]
+version=1
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
+[pcbnew]
+version=1
+LastNetListRead=control-display.net
+UseCmpFile=1
+PadDrill="    1.000000"
+PadDrillOvalY="    1.000000"
+PadSizeH="    2.500000"
+PadSizeV="    2.500000"
+PcbTextSizeV="    1.500000"
+PcbTextSizeH="    1.500000"
+PcbTextThickness="    0.300000"
+ModuleTextSizeV="    1.000000"
+ModuleTextSizeH="    1.000000"
+ModuleTextSizeThickness="    0.150000"
+SolderMaskClearance="    0.000000"
+SolderMaskMinWidth="    0.000000"
+DrawSegmentWidth="    0.200000"
+BoardOutlineThickness="    0.100000"
+ModuleOutlineThickness="    0.150000"
+[pcbnew/libraries]
+LibDir=
+LibName1=/home/bouyer/kicad/libraries/texas-local
+LibName2=/home/bouyer/kicad/libraries/ok-smd-generic
+LibName3=Capacitors
+LibName4=Capacitors_Elko_ThroughHole
+LibName5=Capacitors_SMD
+LibName6=Capacitors_ThroughHole_RevA
+LibName7=Choke_SMD_RevB_28Dez2012
+LibName8=CommonModeChoke_Wuerth_Type-WE-CMB_RevA_24Oct2010
+LibName9=Connect
+LibName10=SMD_Packages
+LibName11=Discret
+LibName12=Divers
+LibName13=Filters_HF_Coils_NEOSID
+LibName14=Inductors
+LibName15=Inductors_NEOSID
+LibName16=Wire_Pads
+LibName17=/home/bouyer/kicad/libraries/bouyer-smd
+LibName18=/home/bouyer/kicad/libraries/LCDdisplays
+LibName19=display-interco
+[eeschema]
+version=1
+LibDir=
+[eeschema/libraries]
+LibName1=control-display-rescue
+LibName2=power
+LibName3=device
+LibName4=transistors
+LibName5=conn
+LibName6=linear
+LibName7=regul
+LibName8=74xx
+LibName9=cmos4000
+LibName10=adc-dac
+LibName11=memory
+LibName12=xilinx
+LibName13=special
+LibName14=microcontrollers
+LibName15=dsp
+LibName16=microchip
+LibName17=analog_switches
+LibName18=motorola
+LibName19=texas
+LibName20=intel
+LibName21=audio
+LibName22=interface
+LibName23=digital-audio
+LibName24=philips
+LibName25=display
+LibName26=cypress
+LibName27=siliconi
+LibName28=opto
+LibName29=atmel
+LibName30=contrib
+LibName31=valves
+LibName32=/home/bouyer/kicad/libraries/LCDdisplays
+LibName33=/home/bouyer/kicad/libraries/texas-local

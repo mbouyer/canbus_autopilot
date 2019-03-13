@@ -1,0 +1,46 @@
+eeschema (2013-dec-23)-stable  >> Creation date: Wed Feb 26 19:46:23 2014
+#Cmp ( order = Reference )
+| C1         10uF        ; ~           
+| C2         100nF       ; ~           
+| C3         100nF       ; ~           
+| C4         47uF        ; ~           
+| C5         47uF        ; ~           
+| C6         47uF        ; ~           
+| D1         DIODESCH    ; ~           
+| P1         CONN_5      ;             
+| P2         CONN_2      ;             
+| P3         CONN_6      ;             
+| P4         CONN_4      ;             
+| P5         CONN_4      ;             
+| R1         10K         ; ~           
+| R2         10K         ; ~           
+| U1         PIC18F2XK80 ;             
+| U2         STEVAL-MKI108V2; ~           
+| U3         MCP2562     ; MCP2562     
+| U4         UA78M33     ;             
+| U5         UA78M05     ;             
+#End Cmp
+
+#Cmp ( order = Value )
+| 100nF        C2        ; ~           
+| 100nF        C3        ; ~           
+| 10uF         C1        ; ~           
+| 47uF         C4        ; ~           
+| 47uF         C5        ; ~           
+| 47uF         C6        ; ~           
+| DIODESCH     D1        ; ~           
+| CONN_5       P1        ;             
+| CONN_2       P2        ;             
+| CONN_6       P3        ;             
+| CONN_4       P4        ;             
+| CONN_4       P5        ;             
+| 10K          R1        ; ~           
+| 10K          R2        ; ~           
+| PIC18F2XK80  U1        ;             
+| UA78M33      U4        ;             
+| UA78M05      U5        ;             
+| MCP2562      U3        ; MCP2562     
+| STEVAL-MKI108V2 U2        ; ~           
+#End Cmp
+
+#End List

@@ -1,0 +1,82 @@
+eeschema (2013-dec-23)-stable  >> Creation date: Wed Feb 26 19:46:11 2014
+#Cmp ( order = Reference )
+| C1         47uF        ; ~           
+| C2         10uF        ; ~           
+| C3         100nF       ; ~           
+| C4         100nF       ; ~           
+| C5         100nF       ; ~           
+| C6         47uF        ; ~           
+| C7         560uF       ; ~           
+| C8         4.7nF       ; ~           
+| D1         LED         ; ~           
+| K1         CONN_3      ;             
+| P1         CONN_6      ;             
+| P2         CONN_6      ;             
+| P3         CONN_2      ;             
+| P4         CONN_2      ;             
+| P5         CONN_4      ;             
+| P6         CONN_4      ;             
+| P7         CONN_2      ;             
+| Q1         FDD8780     ; D-PAK       
+| R1         1.5K        ; ~           
+| R2         330         ; ~           
+| R3         3.3K        ; ~           
+| R4         3.3K        ; ~           
+| R5         1K          ; ~           
+| R6         1K          ; ~           
+| R7         1K          ; ~           
+| R8         10K         ; ~           
+| R9         1K          ; ~           
+| R10        1K          ; ~           
+| R11        1-K         ; ~           
+| R12        1.5K        ; ~           
+| R13        150         ; ~           
+| R14        150         ; ~           
+| SP1        PKM13EPYH4000-A0; ~           
+| U1         UA78M05     ;             
+| U2         PIC18F2XK80 ;             
+| U3         MCP2561     ; MCP2562     
+| U4         VNH5019A    ; ~           
+#End Cmp
+
+#Cmp ( order = Value )
+| 4.7nF        C8        ; ~           
+| 100nF        C3        ; ~           
+| 100nF        C4        ; ~           
+| 100nF        C5        ; ~           
+| 10uF         C2        ; ~           
+| 47uF         C1        ; ~           
+| 47uF         C6        ; ~           
+| 560uF        C7        ; ~           
+| LED          D1        ; ~           
+| CONN_3       K1        ;             
+| CONN_6       P1        ;             
+| CONN_6       P2        ;             
+| CONN_2       P3        ;             
+| CONN_2       P4        ;             
+| CONN_4       P5        ;             
+| CONN_4       P6        ;             
+| CONN_2       P7        ;             
+| FDD8780      Q1        ; D-PAK       
+| 150          R13       ; ~           
+| 150          R14       ; ~           
+| 330          R2        ; ~           
+| 1K           R5        ; ~           
+| 1K           R6        ; ~           
+| 1K           R7        ; ~           
+| 1K           R9        ; ~           
+| 1K           R10       ; ~           
+| 1.5K         R1        ; ~           
+| 1.5K         R12       ; ~           
+| 3.3K         R3        ; ~           
+| 3.3K         R4        ; ~           
+| 10K          R8        ; ~           
+| 1-K          R11       ; ~           
+| PKM13EPYH4000-A0 SP1       ; ~           
+| UA78M05      U1        ;             
+| PIC18F2XK80  U2        ;             
+| MCP2561      U3        ; MCP2562     
+| VNH5019A     U4        ; ~           
+#End Cmp
+
+#End List

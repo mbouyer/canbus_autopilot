@@ -1,0 +1,80 @@
+Cmp-Mod V01 Created by CvPcb (2013-dec-23)-stable date = Fri Mar 14 14:50:06 2014
+
+BeginCmp
+TimeStamp = /532173F1;
+Reference = C1;
+ValeurCmp = C;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /532173E4;
+Reference = C2;
+ValeurCmp = C;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /53230963;
+Reference = C3;
+ValeurCmp = 100n;
+IdModule  = C2;
+EndCmp
+
+BeginCmp
+TimeStamp = /53217453;
+Reference = P1;
+ValeurCmp = CONN_1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /53221BE9;
+Reference = P2;
+ValeurCmp = CONN_1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /53221C1C;
+Reference = P3;
+ValeurCmp = CONN_1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /53221C22;
+Reference = P4;
+ValeurCmp = CONN_1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /53217466;
+Reference = P5;
+ValeurCmp = CONN_1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /532173C4;
+Reference = R1;
+ValeurCmp = 1M;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /532172E9;
+Reference = U1;
+ValeurCmp = 74HC14;
+IdModule  = DIP-14__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /532174B3;
+Reference = X1;
+ValeurCmp = CRYSTAL;
+IdModule  = Crystal_HC49-U_Vertical_RevA_09Aug2010;
+EndCmp
+
+EndListe

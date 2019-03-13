@@ -1,0 +1,50 @@
+eeschema (2013-dec-23)-stable  >> Creation date: Wed Feb 26 19:45:40 2014
+#Cmp ( order = Reference )
+| C1         1uF         ; ~           
+| C2         1uF         ; ~           
+| C3         1uF         ; ~           
+| C4         1uF         ; ~           
+| C5         1uF         ; ~           
+| C6         1uF         ; ~           
+| C7         1uF         ; ~           
+| C8         1uF         ; ~           
+| C9         1uF         ; ~           
+| C10        1uF         ; ~           
+| C11        1uF         ; ~           
+| C12        1uF         ; ~           
+| D1         SL02        ;             
+| D2         SL02        ;             
+| DISPLAY1   EADOGM132W5 ;             
+| IC1        LM3405      ;             
+| K1         CONN_3      ;             
+| L1         68uH        ;             
+| P1         CONN_5      ;             
+| P2         CONN_2      ;             
+| R1         5.1         ;             
+#End Cmp
+
+#Cmp ( order = Value )
+| 1uF          C1        ; ~           
+| 1uF          C2        ; ~           
+| 1uF          C3        ; ~           
+| 1uF          C4        ; ~           
+| 1uF          C5        ; ~           
+| 1uF          C6        ; ~           
+| 1uF          C7        ; ~           
+| 1uF          C8        ; ~           
+| 1uF          C9        ; ~           
+| 1uF          C10       ; ~           
+| 1uF          C11       ; ~           
+| 1uF          C12       ; ~           
+| SL02         D1        ;             
+| SL02         D2        ;             
+| EADOGM132W5  DISPLAY1  ;             
+| LM3405       IC1       ;             
+| CONN_3       K1        ;             
+| 68uH         L1        ;             
+| CONN_5       P1        ;             
+| CONN_2       P2        ;             
+| 5.1          R1        ;             
+#End Cmp
+
+#End List

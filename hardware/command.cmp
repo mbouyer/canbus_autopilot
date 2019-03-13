@@ -1,0 +1,248 @@
+Cmp-Mod V01 Created by CvPcb (2013-dec-23)-stable date = Thu Mar  6 17:53:12 2014
+
+BeginCmp
+TimeStamp = /53061E9A;
+Reference = C1;
+ValeurCmp = 47uF;
+IdModule  = CP_5x6mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /53061EA0;
+Reference = C2;
+ValeurCmp = 10uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /53050736;
+Reference = C3;
+ValeurCmp = 100nF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /530BBDE2;
+Reference = C4;
+ValeurCmp = 100nF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /53050F85;
+Reference = C5;
+ValeurCmp = 100nF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /53061E74;
+Reference = C6;
+ValeurCmp = 47uF;
+IdModule  = CP_5x6mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9707;
+Reference = C7;
+ValeurCmp = 560uF;
+IdModule  = CP14;
+EndCmp
+
+BeginCmp
+TimeStamp = /530BB585;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LEDV;
+EndCmp
+
+BeginCmp
+TimeStamp = /530BB173;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = SIL-3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530CDE40;
+Reference = P1;
+ValeurCmp = CONN_6;
+IdModule  = SIL-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /530735B4;
+Reference = P2;
+ValeurCmp = CONN_6;
+IdModule  = PINHEAD1-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /530BBEF8;
+Reference = P3;
+ValeurCmp = CONN_2;
+IdModule  = PINHEAD1-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9947;
+Reference = P4;
+ValeurCmp = CONN_2;
+IdModule  = bornier2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5304BEB4;
+Reference = P5;
+ValeurCmp = CONN_4;
+IdModule  = phoenix_1770979;
+EndCmp
+
+BeginCmp
+TimeStamp = /5304BEA5;
+Reference = P6;
+ValeurCmp = CONN_4;
+IdModule  = phoenix_1770979;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B95C1;
+Reference = P7;
+ValeurCmp = CONN_2;
+IdModule  = bornier2;
+EndCmp
+
+BeginCmp
+TimeStamp = /530C684E;
+Reference = Q1;
+ValeurCmp = FDD8780;
+IdModule  = DPAK2;
+EndCmp
+
+BeginCmp
+TimeStamp = /530617C1;
+Reference = R1;
+ValeurCmp = 1.5K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530BB900;
+Reference = R2;
+ValeurCmp = 330;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9BA4;
+Reference = R3;
+ValeurCmp = 3.3K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B9E;
+Reference = R4;
+ValeurCmp = 3.3K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B8D;
+Reference = R5;
+ValeurCmp = 1K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B87;
+Reference = R6;
+ValeurCmp = 1K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B7B;
+Reference = R7;
+ValeurCmp = 1K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B93;
+Reference = R8;
+ValeurCmp = 10K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B01;
+Reference = R9;
+ValeurCmp = 1K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B07;
+Reference = R10;
+ValeurCmp = 1K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9B81;
+Reference = R11;
+ValeurCmp = 1-K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B9A15;
+Reference = R12;
+ValeurCmp = 1.5K;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /531894D9;
+Reference = R13;
+ValeurCmp = 10K;
+IdModule  = Resistor_SMD1206_HandSoldering_RevA_Date21Jun2010;
+EndCmp
+
+BeginCmp
+TimeStamp = /53060D6B;
+Reference = SP1;
+ValeurCmp = PKM13EPYH4000-A0;
+IdModule  = PKM13EPYH4000-A0;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B887E;
+Reference = U1;
+ValeurCmp = UA78M05;
+IdModule  = SOT223;
+EndCmp
+
+BeginCmp
+TimeStamp = /530500AA;
+Reference = U2;
+ValeurCmp = PIC18F2XK80;
+IdModule  = microchip-pic18fxx5x-SO-28W;
+EndCmp
+
+BeginCmp
+TimeStamp = /5304EBA3;
+Reference = U3;
+ValeurCmp = MCP2562;
+IdModule  = SOIC-8_N;
+EndCmp
+
+BeginCmp
+TimeStamp = /530B8E64;
+Reference = U4;
+ValeurCmp = VNH5019A;
+IdModule  = multipowerso-30;
+EndCmp
+
+EndListe

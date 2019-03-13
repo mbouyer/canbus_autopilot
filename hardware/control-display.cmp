@@ -1,0 +1,150 @@
+Cmp-Mod V01 Created by CvPcb (2013-dec-23)-stable date = Sat Feb 22 20:11:33 2014
+
+BeginCmp
+TimeStamp = /52FF4790;
+Reference = C1;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF459A;
+Reference = C2;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF458A;
+Reference = C3;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF457A;
+Reference = C4;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4574;
+Reference = C5;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF456E;
+Reference = C6;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4568;
+Reference = C7;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4562;
+Reference = C8;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4318;
+Reference = C9;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4A15;
+Reference = C10;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4A92;
+Reference = C11;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4A0F;
+Reference = C12;
+ValeurCmp = 1uF;
+IdModule  = c_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4B62;
+Reference = D1;
+ValeurCmp = SL02;
+IdModule  = D-SMF;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4BD3;
+Reference = D2;
+ValeurCmp = SL02;
+IdModule  = D-SMF;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF42ED;
+Reference = DISPLAY1;
+ValeurCmp = EADOGM132W5;
+IdModule  = LCDdisplays-EADOGM132W5;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF497E;
+Reference = IC1;
+ValeurCmp = LM3405;
+IdModule  = SOT23_6;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF5DDC;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = SIL-3;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF4B31;
+Reference = L1;
+ValeurCmp = 68uH;
+IdModule  = SM1212;
+EndCmp
+
+BeginCmp
+TimeStamp = /5308F5F3;
+Reference = P1;
+ValeurCmp = CONN_5;
+IdModule  = SIL-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /5308F602;
+Reference = P2;
+ValeurCmp = CONN_2;
+IdModule  = pilote-interco-display;
+EndCmp
+
+BeginCmp
+TimeStamp = /52FF5096;
+Reference = R1;
+ValeurCmp = 5.1;
+IdModule  = SM1206;
+EndCmp
+
+EndListe

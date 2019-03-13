@@ -1,0 +1,58 @@
+eeschema (2013-dec-23)-stable  >> Creation date: Wed Feb 26 19:45:58 2014
+#Cmp ( order = Reference )
+| C1         47uF        ; ~           
+| C2         47uF        ; ~           
+| C3         10uF        ; ~           
+| C4         100nF       ; ~           
+| C5         100nF       ; ~           
+| C6         47uF        ; ~           
+| D1         DIODESCH    ; ~           
+| E1         ROTARY_ENCODER; ~           
+| K1         CONN_3      ;             
+| P1         CONN_2      ;             
+| P2         CONN_6      ;             
+| P3         CONN_4      ;             
+| P4         CONN_4      ;             
+| P5         CONN_5      ;             
+| P6         CONN_5      ;             
+| R1         1.5K        ; ~           
+| SP1        PKM13EPYH4000-A0; ~           
+| SW1        5G          ; ~           
+| SW2        5G          ; ~           
+| SW3        5G          ; ~           
+| SW4        5G          ; ~           
+| U1         UA78M05     ;             
+| U2         UA78M33     ;             
+| U3         PIC18F2XK80 ;             
+| U4         MCP2562     ; MCP2562     
+#End Cmp
+
+#Cmp ( order = Value )
+| 100nF        C4        ; ~           
+| 100nF        C5        ; ~           
+| 10uF         C3        ; ~           
+| 47uF         C1        ; ~           
+| 47uF         C2        ; ~           
+| 47uF         C6        ; ~           
+| DIODESCH     D1        ; ~           
+| ROTARY_ENCODER E1        ; ~           
+| CONN_3       K1        ;             
+| CONN_2       P1        ;             
+| CONN_6       P2        ;             
+| CONN_4       P3        ;             
+| CONN_4       P4        ;             
+| CONN_5       P5        ;             
+| CONN_5       P6        ;             
+| 1.5K         R1        ; ~           
+| PKM13EPYH4000-A0 SP1       ; ~           
+| 5G           SW1       ; ~           
+| 5G           SW2       ; ~           
+| 5G           SW3       ; ~           
+| 5G           SW4       ; ~           
+| UA78M05      U1        ;             
+| UA78M33      U2        ;             
+| PIC18F2XK80  U3        ;             
+| MCP2562      U4        ; MCP2562     
+#End Cmp
+
+#End List
