@@ -496,67 +496,6 @@ again:
 		CLRWDT;
 		if (PIR5bits.RXBnIF)
 			nmea2000_receive();
-#if 0
-		while (RXQueueCount > 0) {
-			unsigned long pgn = 0;
-			CLRWDT;
-			J1939_DequeueMessage( &Msg );
-			if (Msg.DataPage)
-				pgn = (1UL << 16);
-			pgn += ((unsigned long)Msg.PDUFormat << 8);
-			if (Msg.PDUFormat > 239)
-				pgn += Msg.GroupExtension;
-			switch(pgn) {
-			case ISO_REQUEST:
-			{
-				struct iso_request_data *iso_request =
-				    (void *)&Msg.Data[0];
-				pgn = (unsigned long)iso_request->pgn[0] << 16 |
-				      (unsigned long)iso_request->pgn[1] << 8 |
-				      (unsigned long)iso_request->pgn[2];
-				printf("ISO_REQUEST for %ld from %d\n",
-				    pgn, Msg.SourceAddress);
-				switch(pgn) {
-				case PRIVATE_COMPASS_OFFSET:
-					send_private_compass_offset(Msg.SourceAddress);
-					break;
-				case NMEA2000_RATEOFTURN:
-					send_nmea2000_rateofturn();
-					break;
-				case NMEA2000_ATTITUDE:
-					send_nmea2000_attitude();
-					break;
-				}
-				break;
-			}
-			case PRIVATE_COMPASS_OFFSET:
-			{
-				struct private_compass_offset_data *
-				    compass_offset_data = (void *)&Msg.Data[0];
-				compass_offset =
-				    compass_offset_data->offset;
-				write_eeprom_short(COMPASS_OFFSET_ADDR,
-				    compass_offset);
-				printf("compass offset now %d from %d\n", compass_offset, Msg.SourceAddress);
-				break;
-			}
-			case PRIVATE_CALIBRATE_COMPASS:
-				calibrate();
-				break;
-
-			case PRIVATE_COMMAND_STATUS:
-			{
-				struct private_command_status *d =
-				    (void *)&Msg.Data[0];
-				if (d->auto_mode & AUTO_HEAD)
-					send_fast = 1;
-				else
-					send_fast = 0;
-			}
-			}
-
-		}
-#endif
 
 		if (nmea2000_addr_status == ADDR_STATUS_CLAIMING) {
 			if ((timer0_read() - poll_count) > TIMER0_5MS) {
