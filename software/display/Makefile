@@ -29,4 +29,4 @@ ${OBJECTS}: ${HEADERS} Makefile
 	${CC} ${CFLAGS} -V --no-crt --ivt-loc=0x400 --obanksel=2 -mpic16 -p18f26k80 -c ${.IMPSRC} -o ${.TARGET}
 
 clean:
-	rm -f ${.ALLTARGETS}
+	rm -f display.bin *.o *.hex *.cod *.lst *.asm

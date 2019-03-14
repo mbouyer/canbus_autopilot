@@ -32,4 +32,4 @@ ${OBJECTS}: ${HEADERS} Makefile
 	${ASM} -c -o ${.TARGET} ${.IMPSRC}
 
 clean:
-	rm -f ${.ALLTARGETS}
+	rm -f capteur.bin *.o *.hex *.cod *.lst *.asm
