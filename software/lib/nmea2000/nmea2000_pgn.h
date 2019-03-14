@@ -208,9 +208,9 @@ struct private_command_errack {
 struct private_command_factors {
 	char slot;
 	int  factors[3];
-#define FACTOR_ERR 0
-#define FACTOR_DIF 1
-#define FACTOR_INT 2
+#define FACTOR_ERR  0
+#define FACTOR_DIF  1
+#define FACTOR_DIF2 2
 };
 /*
  * request a command parameter factors slot.

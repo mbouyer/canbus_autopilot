@@ -55,6 +55,7 @@ static int received_heading;
 static int received_pitch;
 static int received_roll;
 static int received_rot_rate;
+static int previous_rot_rate;
 
 unsigned int acuator_time;
 unsigned int last_capteur_data;
@@ -135,7 +136,6 @@ struct steering_factors {
 	int  factors[3];
 } steering_factors[NPARAMS];
 
-static long integral_steering_error;
 static char steering_factors_slot;
 
 static float target_rudder;
@@ -313,6 +313,8 @@ user_receive()
 				/* init rudder pos */
 				rudder_cons = previous_rudder =
 				    a2d_rudder;
+				/* int PID */
+				previous_rot_rate = received_rot_rate;
 				/* power on but idle */
 				EN_ALL = 1;
 				IN_A = 0;
@@ -320,10 +322,8 @@ user_receive()
 				PWM = 0;
 				CCPR2L = 0;
 				CCP2CON = 0; /* PWM off */
-				integral_steering_error = 0;
 			}
 			target_heading = d->heading;
-			target_rudder = a2d_rudder;
 			steering_factors_slot = d->params_slot;
 		}
 		auto_mode = d->auto_mode;
@@ -492,6 +492,7 @@ compute_rudder_cons(void)
 	long heading_error;
 	float rudder_correct;
 	int new_rudder_int;
+	int d_rot;
 
 	if (received_heading == HEADING_INVALID)
 		return;
@@ -503,21 +504,16 @@ compute_rudder_cons(void)
 	else if (heading_error <= -31416L)
 		heading_error = 62832L + heading_error;
 
-	integral_steering_error += heading_error;
-
-	/* max 30 deg (converted to rad * 10000) * STEER_INT_FACTOR */
-	if (integral_steering_error < -522000)
-		integral_steering_error = -522000;
-	else if (integral_steering_error > 522000)
-		integral_steering_error = 522000;
+	/* compute rotational acceleration */
+	d_rot = (received_rot_rate - previous_rot_rate) * 10;
 
 	rudder_correct =
 	  (float)heading_error *
 	    (float)steering_factors[steering_factors_slot].factors[FACTOR_ERR] +
 	  (float)received_rot_rate *
 	    (float)steering_factors[steering_factors_slot].factors[FACTOR_DIF] +
-	  (float)integral_steering_error *
-	    (float)steering_factors[steering_factors_slot].factors[FACTOR_INT];
+	  (float)d_rot *
+	    (float)steering_factors[steering_factors_slot].factors[FACTOR_DIF2];
 	/*
 	 * we have to divide rudder_correct by 100000 because the
 	 * factors are * 100000. 
@@ -827,12 +823,11 @@ again:
 						led_wait = 5;
 					}
 				}
-				printf("A/D c/s %3d I %5d r %4d rc %4d m %d t %6d h %6d R %6d I %7ld\n",
+				printf("A/D c/s %3d I %5d r %4d rc %4d m %d t %6d h %6d R %6d\n",
 				    conv_count,
 				    a2d_motorcurrent, a2d_rudder, rudder_cons,
 				    auto_mode, target_heading,
-				    received_heading, received_rot_rate,
-				    integral_steering_error);
+				    received_heading, received_rot_rate);
 				conv_count = 0;
 				needs_status_update = 1;
 			}

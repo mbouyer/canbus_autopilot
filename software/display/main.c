@@ -1595,7 +1595,7 @@ page_conf_cmd_factors(char pagechange) __wparam
 			sprintf(lcd_displaybuf, "No capteur");
 		} else {
 			send_command_request_factors(received_param_slot);
-			sprintf(lcd_displaybuf, "slot erreur diff intg");
+			sprintf(lcd_displaybuf, "slot erreur diff diff2");
 		}
 		lcd_line = 0;
 		lcd_col = 0;
@@ -1616,7 +1616,7 @@ page_conf_cmd_factors(char pagechange) __wparam
 		    last_slot,
 		    command_factors.factors[FACTOR_ERR],
 		    command_factors.factors[FACTOR_DIF],
-		    command_factors.factors[FACTOR_INT]);
+		    command_factors.factors[FACTOR_DIF2]);
 		lcd_line = 1;
 		lcd_col = 0;
 		displaybuf_small();
