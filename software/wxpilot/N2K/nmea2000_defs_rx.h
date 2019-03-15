@@ -47,7 +47,9 @@ class nmea2000_frame_rx : public nmea2000_desc {
 class nmea2000_attitude_rx : public nmea2000_frame_rx {
     public:
 	inline nmea2000_attitude_rx() :
-	    nmea2000_frame_rx("NMEA2000 attitude", true, NMEA2000_ATTITUDE) {};
+	    nmea2000_frame_rx("NMEA2000 attitude", true, NMEA2000_ATTITUDE) {
+		gettimeofday(&last_rx, NULL);
+	};
 	virtual ~nmea2000_attitude_rx() {};
 	bool handle(const nmea2000_frame &f);
 	void tick(void);
@@ -58,7 +60,9 @@ class nmea2000_attitude_rx : public nmea2000_frame_rx {
 class nmea2000_rateofturn_rx : public nmea2000_frame_rx {
     public:
 	inline nmea2000_rateofturn_rx() :
-	    nmea2000_frame_rx("NMEA2000 rate of turn", true, NMEA2000_RATEOFTURN) {};
+	    nmea2000_frame_rx("NMEA2000 rate of turn", true, NMEA2000_RATEOFTURN) {
+		gettimeofday(&last_rx, NULL);
+	};
 	virtual ~nmea2000_rateofturn_rx() {};
 	bool handle(const nmea2000_frame &f);
 	void tick(void);
@@ -72,6 +76,7 @@ class private_command_status_rx : public nmea2000_frame_rx {
 	    nmea2000_frame_rx("Private Command Status", true, PRIVATE_COMMAND_STATUS) {
 		addr = group = mode = -1;
 		command_factors_request = command_factors = NULL;
+		gettimeofday(&last_rx, NULL);
 	};
 	virtual ~private_command_status_rx() {};
 	bool handle(const nmea2000_frame &f);

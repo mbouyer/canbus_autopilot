@@ -32,26 +32,27 @@
 pilotStatus::pilotStatus(wxWindow *parent, wxWindowID id)
 	: wxPanel(parent, id)
 {
-	wxSizerFlags stfl(0);
-	stfl.Expand().Border(wxALL, 5);
-	wxFont font = this->GetFont();
-
 	mainsizer = new wxFlexGridSizer(2, 5, 5);
+
+	wxSizerFlags datafl(0);
+	datafl.Expand().Left();
+	wxSizerFlags labelfl(0);
+	labelfl.Right();
 
 #define LABELTEXT(t) \
     new wxStaticText(this, -1, wxT(t))
 
-	mainsizer->Add(LABELTEXT("Address:"), wxALIGN_RIGHT);
+	mainsizer->Add(LABELTEXT("Address:"), labelfl);
 	Taddr = new wxStaticText(this, -1, wxT(""));
-	mainsizer->Add(Taddr, wxEXPAND);
+	mainsizer->Add(Taddr, datafl);
 
-	mainsizer->Add(LABELTEXT("Param Group:"), wxALIGN_RIGHT);
+	mainsizer->Add(LABELTEXT("Param Group:"), labelfl);
 	Tgroup = new wxStaticText(this, -1, wxT(""));
-	mainsizer->Add(Tgroup, wxEXPAND);
+	mainsizer->Add(Tgroup, datafl);
 
-	mainsizer->Add(LABELTEXT("Mode:"), wxALIGN_RIGHT);
+	mainsizer->Add(LABELTEXT("Mode:"), labelfl);
 	Tmode = new wxStaticText(this, -1, wxT(""));
-	mainsizer->Add(Tmode, wxEXPAND);
+	mainsizer->Add(Tmode, datafl);
 
 	SetSizerAndFit(mainsizer);
 }
