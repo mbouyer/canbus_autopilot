@@ -1595,7 +1595,7 @@ page_conf_cmd_factors(char pagechange) __wparam
 			sprintf(lcd_displaybuf, "No capteur");
 		} else {
 			send_command_request_factors(received_param_slot);
-			sprintf(lcd_displaybuf, "slot erreur diff diff2");
+			sprintf(lcd_displaybuf, "slot erreur ROT accel");
 		}
 		lcd_line = 0;
 		lcd_col = 0;
