@@ -40,7 +40,7 @@ pilotParams::pilotParams(wxWindow *parent, wxWindowID id)
 	slot = wxNOT_FOUND;
 
 	wxSizerFlags ctrlfl(0);
-	ctrlfl.Expand().Border(wxALL, 5);
+	ctrlfl.Center().Border(wxALL, 3);
 	controlsizer = new wxBoxSizer( wxVERTICAL );
 
 	paramsGroupsList = new wxArrayString;
@@ -62,11 +62,28 @@ pilotParams::pilotParams(wxWindow *parent, wxWindowID id)
 	      wxCommandEventHandler(pilotParams::OnReset), NULL, this);
 	controlsizer->Add(resetButton,  ctrlfl);
 
-	inputsizer = new wxBoxSizer( wxVERTICAL );
+	inputsizer = new wxFlexGridSizer(2, 5, 5);
 	wxSizerFlags intputfl(0);
-	intputfl.Expand().Border(wxALL, 5);
+	intputfl.Expand();
 
 	for (int i = 0; i < NFACTORS; i++) {
+#define LABELTEXT(t) new wxStaticText(this, -1, wxT(t))
+		wxSizerFlags labelfl(0);
+		labelfl.Right();
+		switch(i) {
+		case 0:
+			inputsizer->Add(LABELTEXT("error:"), labelfl);
+			break;
+		case 1:
+			inputsizer->Add(LABELTEXT("ROT:"), labelfl);
+			break;
+		case 2:
+			inputsizer->Add(LABELTEXT("accel:"), labelfl);
+			break;
+		default:
+			inputsizer->Add(LABELTEXT("unkn:"), labelfl);
+			break;
+		}
 		param[i] = new wxNumberControl(this, wxID_ANY);
 		inputsizer->Add(param[i], intputfl);
 	}

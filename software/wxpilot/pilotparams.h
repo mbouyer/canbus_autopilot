@@ -40,7 +40,7 @@ class pilotParams: public wxPanel
   private:
 	wxBoxSizer *mainsizer;
 	wxBoxSizer *controlsizer;
-	wxBoxSizer *inputsizer;
+	wxFlexGridSizer *inputsizer;
 	wxComboBox *paramsGroups;
 	wxArrayString *paramsGroupsList;
 	wxButton *applyButton;
