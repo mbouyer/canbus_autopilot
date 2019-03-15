@@ -313,7 +313,7 @@ user_receive()
 				/* init rudder pos */
 				rudder_cons = previous_rudder =
 				    a2d_rudder;
-				/* int PID */
+				/* init PID */
 				previous_rot_rate = received_rot_rate;
 				/* power on but idle */
 				EN_ALL = 1;
@@ -506,6 +506,7 @@ compute_rudder_cons(void)
 
 	/* compute rotational acceleration */
 	d_rot = (received_rot_rate - previous_rot_rate) * 10;
+	previous_rot_rate = received_rot_rate;
 
 	rudder_correct =
 	  (float)heading_error *
