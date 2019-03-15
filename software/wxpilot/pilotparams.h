@@ -25,6 +25,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <wxpilot.h>
 #include <wx/combobox.h>
 #include <widgets/wxNumberControl.h>
 #include <N2K/nmea2000_defs_tx.h>
@@ -34,7 +35,7 @@ class pilotParams: public wxPanel
 {
   public:
 	pilotParams(wxWindow *parent, wxWindowID id=wxID_ANY);
-	void setValues(int, int values[3]);
+	void setValues(int, int values[NFACTORS]);
 	bool setSlot(int slot);
   private:
 	wxBoxSizer *mainsizer;
@@ -45,14 +46,12 @@ class pilotParams: public wxPanel
 	wxButton *applyButton;
 	wxButton *resetButton;
 
-	wxNumberControl *param_p;
-	wxNumberControl *param_i;
-	wxNumberControl *param_d;
+	wxNumberControl *param[NFACTORS];
 
 	private_command_factors_tx *command_factors_tx;
 	private_command_factors_request_tx *command_factors_request_tx;
 
-	int values[3];
+	int values[NFACTORS];
 	int slot;
 
 	bool requestSlot(int);

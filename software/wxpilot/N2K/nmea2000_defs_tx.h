@@ -29,10 +29,9 @@
 #define NMEA2000_FRAME_TX_H_
 #include "nmea2000_frame.h"
 #include "nmea2000_defs.h"
+#include <wxpilot.h>
 #include <array>
 #include <time.h>
-
-class NMEA0183;
 
 class nmea2000_frame_tx : public nmea2000_frame, public nmea2000_desc {
     public:
@@ -108,7 +107,7 @@ class private_command_factors_tx : public nmea2000_frame_tx {
     public:
 	inline private_command_factors_tx() : nmea2000_frame_tx("Private command factors", true, PRIVATE_COMMAND_FACTORS, NMEA2000_PRIORITY_INFO, 8) { }
 
-	void update(int, int[3]);
+	void update(int, int[NFACTORS]);
 };
 
 class private_command_factors_request_tx : public nmea2000_frame_tx {

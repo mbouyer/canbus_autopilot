@@ -66,12 +66,10 @@ pilotParams::pilotParams(wxWindow *parent, wxWindowID id)
 	wxSizerFlags intputfl(0);
 	intputfl.Expand().Border(wxALL, 5);
 
-	param_p = new wxNumberControl(this, wxID_ANY);
-	inputsizer->Add(param_p, intputfl);
-	param_i = new wxNumberControl(this, wxID_ANY);
-	inputsizer->Add(param_i, intputfl);
-	param_d = new wxNumberControl(this, wxID_ANY);
-	inputsizer->Add(param_d, intputfl);
+	for (int i = 0; i < NFACTORS; i++) {
+		param[i] = new wxNumberControl(this, wxID_ANY);
+		inputsizer->Add(param[i], intputfl);
+	}
 
 	mainsizer = new wxBoxSizer( wxHORIZONTAL );
 	mainsizer->Add(controlsizer, wxSizerFlags(1).Expand());
@@ -97,10 +95,10 @@ pilotParams::OnApply(wxCommandEvent & event)
 {
 	if (slot == wxNOT_FOUND)
 		return;
-	int values[3];
-	values[0] = param_p->GetValue();
-	values[1] = param_i->GetValue();
-	values[2] = param_d->GetValue();
+	int values[NFACTORS];
+	for (int i = 0; i < NFACTORS; i++) {
+		values[i] = param[i]->GetValue();
+	}
 	command_factors_tx->update(slot, values);
 	nmea2000P->send_bypgn(PRIVATE_COMMAND_FACTORS, true);
 }
@@ -109,9 +107,8 @@ void
 pilotParams::OnReset(wxCommandEvent & event)
 {
 	if (slot == wxNOT_FOUND) {
-		param_p->SetValue(0);
-		param_i->SetValue(0);
-		param_d->SetValue(0);
+		for (int i = 0; i < NFACTORS; i++) 
+			param[i]->SetValue(0);
 	} else {
 		requestSlot(slot);
 	}
@@ -144,12 +141,12 @@ pilotParams::setSlot(int s)
 }
 
 void
-pilotParams::setValues(int s, int v[3])
+pilotParams::setValues(int s, int v[NFACTORS])
 {
 	if (s != slot)
 		return;
 	paramsGroups->SetSelection(s);
-	param_p->SetValue(v[0]);
-	param_i->SetValue(v[1]);
-	param_d->SetValue(v[2]);
+	for (int i = 0; i < NFACTORS; i++) {
+		param[i]->SetValue(v[i]);
+	}
 }

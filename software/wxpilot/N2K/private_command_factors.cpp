@@ -34,20 +34,20 @@ bool
 private_command_factors_rx::handle(const nmea2000_frame &f)
 {
 	int slot;
-	int values[3];
+	int values[NFACTORS];
 	slot = f.frame2int8(0);
-	for (int i = 0; i < 3; i++) 
+	for (int i = 0; i < NFACTORS; i++) 
 		values[i] = f.frame2int16(1 + (i * 2));
 	wxp->setFactors(slot, values);
 }
 
 void
-private_command_factors_tx::update(int slot, int values[3])
+private_command_factors_tx::update(int slot, int values[NFACTORS])
 {
 	if (getdst() == 0)
 		return;
 	uint82frame(slot, 0);
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < NFACTORS; i++)
 		int162frame(values[i], 1 + (i * 2));
 
 	valid = true;

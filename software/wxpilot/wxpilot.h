@@ -25,6 +25,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef _WXPILOT_H_
+#define _WXPILOT_H_
+
+/* Keep in sync with PRIVATE_COMMAND_FACTORS PGN definition */
+#define FACTOR_ERR 0
+#define FACTOR_DIF 1
+#define FACTOR_DIF2 2
+#define NFACTORS  3
+
 class PilotFrame;
 
 class wxpilot : public wxApp
@@ -38,9 +47,11 @@ class wxpilot : public wxApp
 	void setPilotHeading(double, bool);
 	void setRudder(double, bool);
 	void setStatus(int, int, const wxString &);
-	void setFactors(int, int[3]);
+	void setFactors(int, int[NFACTORS]);
   private:
 	PilotFrame *frame;
 };
 
 extern wxpilot *wxp;
+
+#endif /* _WXPILOT_H_ */
