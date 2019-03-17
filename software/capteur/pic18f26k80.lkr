@@ -32,3 +32,5 @@ DATABANK   NAME=sfr15      START=0xF00          END=0xF5F	   PROTECTED
 ACCESSBANK NAME=accesssfr  START=0xF60          END=0xFFF          PROTECTED
 
 SECTION    NAME=CONFIG     ROM=config
+SECTION	   NAME=.privatefp  RAM=gpr14
+SECTION	   NAME=.privatei  RAM=gpr13
