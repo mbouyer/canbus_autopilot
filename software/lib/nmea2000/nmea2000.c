@@ -34,6 +34,7 @@
 
 unsigned char nmea2000_addr_status;
 unsigned char nmea2000_addr;
+unsigned char canbus_mute;
 static unsigned char nmea2000_claim_date;
 static struct iso_address_claim_data address_claim_data;
 
@@ -174,6 +175,10 @@ nmea2000_receive()
 			    rdlc == CONTROL_RESET_SIZE) {
 				__asm__("reset");
 				break;
+			} else if (rdata[0] == CONTROL_MUTE &&
+			    rdlc == CONTROL_MUTE_SIZE) {
+				canbus_mute = rdata[1] & 0x1;
+				break;
 			}
 			/* FALLTHROUGH */
 		default:
@@ -207,7 +212,7 @@ nmea2000_send_single_frame(__data struct nmea2000_msg *msg)
 	unsigned char new_tx_queue_prod;
 	struct pic18_can_frame *txq;
 
-	if (nmea2000_addr_status != ADDR_STATUS_OK)
+	if (nmea2000_addr_status != ADDR_STATUS_OK || canbus_mute)
 		return 0;
 
 	new_tx_queue_prod = (pix18_tx_queue_prod + 1) & PIC18_TX_QUEUE_MASK;
@@ -407,4 +412,5 @@ nmea2000_init()
 	nmea2000_addr_status = ADDR_STATUS_INVALID;
 	nmea2000_addr = NMEA2000_ADDR_NULL;
 	nmea2000_claimaddr(NMEA2000_USER_ADDRESS, NMEA2000_ADDR_GLOBAL);
+	canbus_mute = 0;
 }

@@ -42,6 +42,10 @@
 #define FASTPACKET_IDX_MASK 0x1f
 #define FASTPACKET_ID_MASK  0xe0
 
+#ifndef NMEA2000_DATA_LENGTH
+#define NMEA2000_DATA_LENGTH 8
+#endif
+
 /* request for a PGN */
 #define ISO_REQUEST 59904UL
 struct iso_request_data {
@@ -238,4 +242,6 @@ struct private_remote_control {
 #define CONTROL_LIGHT_VAL_SIZE 3
 #define CONTROL_RESET	0x02
 #define CONTROL_RESET_SIZE 0x01
+#define CONTROL_MUTE	0x02
+#define CONTROL_MUTE_SIZE 0x02
 
