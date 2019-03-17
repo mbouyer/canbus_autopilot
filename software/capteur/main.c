@@ -66,7 +66,7 @@ unsigned long nmea2000_user_id;
 #define GYRO_Y_OFFSET_ADDR 0x104 /* address of gyro_y_offset save in eeprom */
 #define GYRO_Z_OFFSET_ADDR 0x108 /* address of gyro_z_offset save in eeprom */
 #define COMPASS_OFFSET_ADDR 0x10e /* address of compass_offset save in eeprom */
-static int compass_offset;
+static short compass_offset;
 
 #define COMPASS_CORRECTION_TABLE_OFFSET 0x000
 #define COMPASS_CORRECTION_TABLE_SIZE 124 /* 0 to 62831 / 512 + 1 */
@@ -81,7 +81,7 @@ static struct magn_data magn_data_integrate;
 
 static unsigned char gyro_loops;
 
-static int accel_temp;
+static short accel_temp;
 
 static unsigned char sid;
 
@@ -94,17 +94,19 @@ static void compute_values(void);
 static void calibrate(void);
 static unsigned char send_fast;
 
-unsigned int timer0_read(void);
+unsigned short timer0_read(void);
 #pragma callee_saves timer0_read
 
 static char counter_1hz;	       
 static volatile char counter_10hz;	       
-static volatile unsigned int softintrs;
-#define INT_10HZ	 0x0001
+static volatile unsigned char softintrs;
+#define INT_10HZ	 ((unsigned char)0x0001)
 
 #define TIMER0_5MS 192 /* 48 without PLL */
 
 #define CLRWDT __asm__("clrwdt")      
+
+static unsigned short compute_start, compute_end;
 
 union float_char {
 	float f;
@@ -117,7 +119,7 @@ union short_char {
 };
 
 static short
-get_eeprom_short(unsigned int addr)
+get_eeprom_short(unsigned short addr)
 {
 	union short_char s;
 	s.c[0] = eeprom_read(addr);
@@ -126,7 +128,7 @@ get_eeprom_short(unsigned int addr)
 }
 
 static void
-write_eeprom_short(unsigned int addr, short s)
+write_eeprom_short(unsigned short addr, short s)
 {
 	union short_char sc;
 	sc.s = s;
@@ -135,7 +137,7 @@ write_eeprom_short(unsigned int addr, short s)
 }
 
 static float
-get_eeprom_float(unsigned int addr)
+get_eeprom_float(unsigned short addr)
 {
 	union float_char f;
 	f.c[0] = eeprom_read(addr);
@@ -146,7 +148,7 @@ get_eeprom_float(unsigned int addr)
 }
 
 static void
-write_eeprom_float(unsigned int addr, float f)
+write_eeprom_float(unsigned short addr, float f)
 {
 	union float_char fc;
 	fc.f = f;
@@ -177,12 +179,12 @@ get_eeprom_datas(void)
 #endif
 }
 
-static int
-r2d(int r)
+static short
+r2d(short r)
 {
 	float d;
 	d = (float)r / 174.53293F;
-	return (int)d;
+	return (short)d;
 }
 
 static void
@@ -291,8 +293,8 @@ main(void) __naked
 {
 	unsigned char c;
 	unsigned char i;
-	static unsigned int poll_count;
-	static unsigned int hours_count;
+	static unsigned short poll_count;
+	static unsigned short hours_count;
 
 
 	sid = 0;
@@ -310,7 +312,7 @@ main(void) __naked
 	/* reset eeprom datas */
 	for (i = 0; i < COMPASS_CORRECTION_TABLE_SIZE; i++) {
 		short true_heading;
-		true_heading = ((int)i * 512 - 31415);
+		true_heading = ((short)i * 512 - 31415);
 
 		/* last element is the same as first */
 		if (i == COMPASS_CORRECTION_TABLE_SIZE - 1) 
@@ -403,7 +405,7 @@ main(void) __naked
 
 #ifndef CAPTEUR_FAKE
 	for (i = 0; i < 5; i++) {
-		int wait;
+		short wait;
 		c = 0;
 		(void)i2c_readreg(L3DG20_ADDRESS, L3DG20_WHO_AM_I, &c, 1);
 		printf("who am I read 0x%x\n", c);
@@ -514,17 +516,19 @@ again:
 			get_data_am();
 			if (accel_int_count > 0 && gyro_int_count > 0) {
 				long fixed_heading;
-				int base_heading;
-				int orig_heading;
+				short base_heading;
+				short orig_heading;
 				long diff;
 				unsigned char i;
 
+				compute_start = timer0_read();
 				compute_values();
+				compute_end = timer0_read();
 				orig_heading = heading;
 				i = (((heading + 31415) & 0xfe00) >> 9);
 				base_heading = 512 * i - 31415;
 				fixed_heading = (long)heading + (long)compass_correction_table[i];
-				diff = (int)compass_correction_table[i + 1] - (int)compass_correction_table[i];
+				diff = (short)compass_correction_table[i + 1] - (short)compass_correction_table[i];
 				/* fixed_heading += (diff * (heading - base_heading)) / 512 */
 				diff = diff * (heading - base_heading);
 				diff = diff / 512;
@@ -559,7 +563,7 @@ again:
 #else
 						printf("%02x gyro %10ld "
 						    "pitch %6d roll %6d "
-						    "heading %6d %6d %6d %d\n", 
+						    "heading %6d %6d %6d %d %d\n", 
 						    sid,
 						    (long)(rate_of_turn * 10000000.0F),
 						    r2d(pitch),
@@ -567,7 +571,8 @@ again:
 						    r2d(heading) + 180,
 						    orig_heading,
 						    heading,
-						    (int)gyro_loops);
+						    (int)gyro_loops,
+						    (int)compute_end - compute_start);
 #endif
 					}
 					hours_count--;
@@ -672,7 +677,7 @@ get_data_am(void)
 	magn_data_integrate.magn_z = 10L;
 	magn_data_integrate.magn_y = 2000L;
 #else
-	int data_xyz[3];
+	short data_xyz[3];
 	unsigned char data[6];
 
 	if (ACCEL_DRDY) {
@@ -696,7 +701,7 @@ get_data_am(void)
 		if (i2c_readreg(LSM303_M_ADDR, LSM303_M_TEMP_OUT_H,
 		    data, 2)) {
 			accel_temp =
-			    (((int)data[0]) << 4) | (data[1] >> 4);
+			    (((short)data[0]) << 4) | (data[1] >> 4);
 		} else {
 			printf("read accel temp failed\n");
 		}
@@ -713,7 +718,7 @@ get_data_w(void)
 	gyro_data_integrate.gyro_z = 0L;
 	gyro_int_count  = 1;
 #else
-	int data_xyz[3];
+	short data_xyz[3];
 
 	if (GYRO_DRDY) {
 		gyro_int_count++;
@@ -738,10 +743,10 @@ get_data_w(void)
 static void
 calibrate(void)
 {
-	static int previous_heading;
+	static short previous_heading;
 	static long computed_heading;
 	static long start_heading;
-	static int delta;
+	static short delta;
 	static float gyro_adj;
 	unsigned char i, j;
 	long h;
@@ -809,7 +814,7 @@ calibrate(void)
 				CLRWDT;
 				compute_values();
 				/* rate_of_turn * -10000.0 * deltaT */
-				computed_heading += (int)(rate_of_turn * -1000.0F);
+				computed_heading += (short)(rate_of_turn * -1000.0F);
 				if (rot == -1 && computed_heading > 0 &&
 				    previous_heading > 30000 &&
 				    heading < -30000) {
@@ -938,7 +943,7 @@ calibrate(void)
 	return;
 }
 
-unsigned int
+unsigned short
 timer0_read() __naked   
 {
 	/* return TMR0L | (TMR0H << 8), reading TMR0L first */
