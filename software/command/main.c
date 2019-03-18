@@ -76,6 +76,7 @@ static volatile union softintrs {
 } softintrs;
 
 static int target_heading; /* heading to follow */
+static int previous_target_heading;
 static unsigned char auto_mode;
 
 #define CLRWDT __asm__("clrwdt")
@@ -242,7 +243,12 @@ user_receive()
 	{
 		struct nmea2000_rateofturn_data *d = (void *)rdata;
 		decoded = 1;
-		received_rot_rate = d->rate / 1000;
+		if (d->rate > 32767000)
+			received_rot_rate = 32767;
+		else if (d->rate < -32767000)
+			received_rot_rate = -32767;
+		else
+			received_rot_rate = d->rate / 1000;
 		softintrs.bits.int_rot = 1;
 		break;
 	}
@@ -313,7 +319,7 @@ user_receive()
 				/* init rudder pos */
 				rudder_cons = previous_rudder =
 				    a2d_rudder;
-				/* int PID */
+				/* init PID */
 				previous_rot_rate = received_rot_rate;
 				/* power on but idle */
 				EN_ALL = 1;
@@ -322,6 +328,8 @@ user_receive()
 				PWM = 0;
 				CCPR2L = 0;
 				CCP2CON = 0; /* PWM off */
+				/* init target move detection */
+				previous_target_heading = received_heading;
 			}
 			target_heading = d->heading;
 			steering_factors_slot = d->params_slot;
@@ -489,14 +497,38 @@ move_acuator(void)
 static void
 compute_rudder_cons(void)
 {
-	long heading_error;
+	long heading_error, target_heading_move;
 	float rudder_correct;
 	int new_rudder_int;
 	int d_rot;
+	int target_rot;
 
 	if (received_heading == HEADING_INVALID)
 		return;
 
+	target_rot = 0;
+	if (previous_target_heading  != target_heading) {
+		/* compute ROT of target */
+		target_heading_move =
+		    (long)previous_target_heading - (long)target_heading;
+		if (target_heading_move > 31416L)
+			target_heading_move = target_heading_move - 62832L;
+		else if (target_heading_move < -31416L)
+			target_heading_move = target_heading_move + 62832L;
+		/* limit to 0.5rad/s */
+		if (target_heading_move > 500)
+			target_heading_move = 500;
+		else if (target_heading_move < -500)
+			target_heading_move = -500;
+		/* account only for half in the final compute */
+		target_rot = target_heading_move * 5; /* 10 / 2 */
+		previous_target_heading -= target_heading_move;
+
+		if (previous_target_heading > 31416L)
+			previous_target_heading = previous_target_heading - 62832L;
+		else if (previous_target_heading < -31416L)
+			previous_target_heading = previous_target_heading + 62832L;
+	}
 	heading_error = (long)received_heading - (long)target_heading;
 
 	if (heading_error >= 31416L)
@@ -506,11 +538,12 @@ compute_rudder_cons(void)
 
 	/* compute rotational acceleration */
 	d_rot = (received_rot_rate - previous_rot_rate) * 10;
+	previous_rot_rate = received_rot_rate;
 
 	rudder_correct =
 	  (float)heading_error *
 	    (float)steering_factors[steering_factors_slot].factors[FACTOR_ERR] +
-	  (float)received_rot_rate *
+	  ((float)received_rot_rate + (float)target_rot) *
 	    (float)steering_factors[steering_factors_slot].factors[FACTOR_DIF] +
 	  (float)d_rot *
 	    (float)steering_factors[steering_factors_slot].factors[FACTOR_DIF2];

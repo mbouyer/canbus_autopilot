@@ -65,9 +65,9 @@ static float b_x, b_z;		/* reference direction of flux in earth frame */
 float w_bx, w_by, w_bz;		/* estimate gyroscope biases error */
 
 /* euler attitude */
-int heading;
-int pitch;
-int roll;
+short heading;
+short pitch;
+short roll;
 float rate_of_turn;
 
 /* auxiliary variables to avoid reapeated calculations */

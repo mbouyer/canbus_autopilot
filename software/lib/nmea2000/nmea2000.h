@@ -62,6 +62,7 @@ extern unsigned char nmea2000_addr_status;
 #define ADDR_STATUS_INVALID 0
 #define ADDR_STATUS_CLAIMING 1
 #define ADDR_STATUS_OK 2
+extern unsigned char canbus_mute;
 
 extern union nmea2000_id rid;
 #define rdata ((unsigned char *)&RXB0D0)

@@ -38,9 +38,9 @@ extern float w_bx, w_by, w_bz;	/* estimate gyroscope biases error */
 /* estimated orientation quaternion elements */
 extern float SEq_1, SEq_2, SEq_3, SEq_4;
 
-extern int heading;
-extern int pitch;
-extern int roll;
+extern short heading;
+extern short pitch;
+extern short roll;
 extern float rate_of_turn;
 /*
  * inputs: measurements a_?, w_?, m_?

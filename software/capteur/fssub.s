@@ -36,16 +36,23 @@ PLUSW2	equ	0xfdb
 PRODL	equ	0xff3
 PRODH	equ	0xff4
 
+.privatefp      udata
 
-; Internal registers
-.registers	udata_ovr	0x0000
-r0x00	res	1
-
-udata_fssub_0	udata
-___fssub_fl1_1_22	res	4
-
-udata_fssub_1	udata
-___fssub_fl2_1_22	res	4
+r1x00   res     1
+r1x01   res     1
+r1x02   res     1
+r1x03   res     1
+r1x04   res     1
+r1x05   res     1
+r1x06   res     1
+r1x07   res     1
+r1x0b   res     1
+r1x0c   res     1
+r1x0d   res     1
+r1x0e   res     1
+r1x0f   res     1
+___fsxxx_fl1    res     4
+___fsxxx_fl2    res     4
 
 ;--------------------------------------------------------
 ; global & static initialisations
@@ -57,83 +64,77 @@ ___fssub:
 ;	.line	56; fssub.c	__fssub (float a1, float a2) _FS_REENTRANT
 	MOVFF	FSR2L, POSTDEC1
 	MOVFF	FSR1L, FSR2L
-	MOVFF	r0x00, POSTDEC1
+	BANKSEL r1x00
 ;	.line	60; fssub.c	fl1.f = a1;
 	MOVLW	0x02
-	MOVFF	PLUSW2, ___fssub_fl1_1_22
+	MOVFF	PLUSW2, ___fsxxx_fl1
 	MOVLW	0x03
-	MOVFF	PLUSW2, (___fssub_fl1_1_22 + 1)
+	MOVFF	PLUSW2, (___fsxxx_fl1 + 1)
 	MOVLW	0x04
-	MOVFF	PLUSW2, (___fssub_fl1_1_22 + 2)
+	MOVFF	PLUSW2, (___fsxxx_fl1 + 2)
 	MOVLW	0x05
-	MOVFF	PLUSW2, (___fssub_fl1_1_22 + 3)
+	MOVFF	PLUSW2, (___fsxxx_fl1 + 3)
 ;	.line	61; fssub.c	fl2.f = a2;
 	MOVLW	0x06
-	MOVFF	PLUSW2, ___fssub_fl2_1_22
+	MOVFF	PLUSW2, ___fsxxx_fl2
 	MOVLW	0x07
-	MOVFF	PLUSW2, (___fssub_fl2_1_22 + 1)
+	MOVFF	PLUSW2, (___fsxxx_fl2 + 1)
 	MOVLW	0x08
-	MOVFF	PLUSW2, (___fssub_fl2_1_22 + 2)
+	MOVFF	PLUSW2, (___fsxxx_fl2 + 2)
 	MOVLW	0x09
-	MOVFF	PLUSW2, (___fssub_fl2_1_22 + 3)
-	BANKSEL ___fssub_fl2_1_22
+	MOVFF	PLUSW2, (___fsxxx_fl2 + 3)
 ;	.line	64; fssub.c	if (!fl2.l)
-	MOVF	___fssub_fl2_1_22, W, B
-	IORWF	(___fssub_fl2_1_22 + 1), W, B
-	IORWF	(___fssub_fl2_1_22 + 2), W, B
-	IORWF	(___fssub_fl2_1_22 + 3), W, B
+	MOVF	___fsxxx_fl2, W, B
+	IORWF	(___fsxxx_fl2 + 1), W, B
+	IORWF	(___fsxxx_fl2 + 2), W, B
+	IORWF	(___fsxxx_fl2 + 3), W, B
 	BNZ	_00106_DS_
 ;	.line	65; fssub.c	return fl1.f;
-	MOVFF	(___fssub_fl1_1_22 + 3), FSR0L
-	MOVFF	(___fssub_fl1_1_22 + 2), PRODH
-	MOVFF	(___fssub_fl1_1_22 + 1), PRODL
-	BANKSEL	___fssub_fl1_1_22
-	MOVF	___fssub_fl1_1_22, W, B
+	MOVFF	(___fsxxx_fl1 + 3), FSR0L
+	MOVFF	(___fsxxx_fl1 + 2), PRODH
+	MOVFF	(___fsxxx_fl1 + 1), PRODL
+	MOVF	___fsxxx_fl1, W, B
 	BRA	_00109_DS_
 _00106_DS_:
-	BANKSEL	___fssub_fl1_1_22
 ;	.line	66; fssub.c	if (!fl1.l)
-	MOVF	___fssub_fl1_1_22, W, B
-	IORWF	(___fssub_fl1_1_22 + 1), W, B
-	IORWF	(___fssub_fl1_1_22 + 2), W, B
-	IORWF	(___fssub_fl1_1_22 + 3), W, B
+	MOVF	___fsxxx_fl1, W, B
+	IORWF	(___fsxxx_fl1 + 1), W, B
+	IORWF	(___fsxxx_fl1 + 2), W, B
+	IORWF	(___fsxxx_fl1 + 3), W, B
 	BNZ	_00108_DS_
 ;	.line	67; fssub.c	return -fl2.f;
-	BTG	(___fssub_fl2_1_22 + 3), 7, B
-	MOVFF	(___fssub_fl2_1_22 + 3), FSR0L
-	MOVFF	(___fssub_fl2_1_22 + 2), PRODH
-	MOVFF	(___fssub_fl2_1_22 + 1), PRODL
-	MOVF	___fssub_fl2_1_22, W
+	BTG	(___fsxxx_fl2 + 3), 7, B
+	MOVFF	(___fsxxx_fl2 + 3), FSR0L
+	MOVFF	(___fsxxx_fl2 + 2), PRODH
+	MOVFF	(___fsxxx_fl2 + 1), PRODL
+	MOVF	___fsxxx_fl2, W
 	BRA	_00109_DS_
 _00108_DS_:
-	BANKSEL	___fssub_fl2_1_22
 ;	.line	70; fssub.c	fl2.l ^= SIGNBIT;
-	BTG	(___fssub_fl2_1_22 + 3), 7, B
+	BTG	(___fsxxx_fl2 + 3), 7, B
 ;	.line	71; fssub.c	return fl1.f + fl2.f; 
-	MOVF	(___fssub_fl2_1_22 + 3), W, B
+	MOVF	(___fsxxx_fl2 + 3), W, B
 	MOVWF	POSTDEC1,   A
-	MOVF	(___fssub_fl2_1_22 + 2), W, B
+	MOVF	(___fsxxx_fl2 + 2), W, B
 	MOVWF	POSTDEC1,   A
-	MOVF	(___fssub_fl2_1_22 + 1), W, B
+	MOVF	(___fsxxx_fl2 + 1), W, B
 	MOVWF	POSTDEC1,   A
-	MOVF	___fssub_fl2_1_22, W, B
+	MOVF	___fsxxx_fl2, W, B
 	MOVWF	POSTDEC1,   A
-	BANKSEL	(___fssub_fl1_1_22 + 3)
-	MOVF	(___fssub_fl1_1_22 + 3), W, B
+	MOVF	(___fsxxx_fl1 + 3), W, B
 	MOVWF	POSTDEC1,   A
-	MOVF	(___fssub_fl1_1_22 + 2), W, B
+	MOVF	(___fsxxx_fl1 + 2), W, B
 	MOVWF	POSTDEC1,   A
-	MOVF	(___fssub_fl1_1_22 + 1), W, B
+	MOVF	(___fsxxx_fl1 + 1), W, B
 	MOVWF	POSTDEC1,   A
-	MOVF	___fssub_fl1_1_22, W, B
+	MOVF	___fsxxx_fl1, W, B
 	MOVWF	POSTDEC1,   A
 	CALL	___fsadd
-	MOVWF	r0x00,   A
+	MOVWF	r1x00, B
 	MOVLW	0x08
 	ADDWF	FSR1L, F
-	MOVF	r0x00, W
+	MOVF	r1x00, W, B
 _00109_DS_:
-	MOVFF	PREINC1, r0x00
 	MOVFF	PREINC1, FSR2L
 	RETURN	
 
