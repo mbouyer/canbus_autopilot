@@ -1035,11 +1035,10 @@ page_engageddata(char pagechange) __wparam
 		command_target_heading = command_received_heading;
 		if (softintrs & INT_SW_R) {
 			int deg_command_target_heading;
-			softintrs &= ~INT_SW_R;
+			get_rotary_pos();
 			deg_command_target_heading =
 			    rad2deg(command_target_heading);
-			deg_command_target_heading += rotary_pos;
-			rotary_pos = 0;
+			deg_command_target_heading += saved_rotary_pos;
 			if (deg_command_target_heading < 0)
 				deg_command_target_heading += 360;
 			else if (deg_command_target_heading > 359)
@@ -1126,16 +1125,16 @@ page_act(char pagechange) __wparam
 	}
 	if ((timer0_read() - last_xmit) > 1000 && rotary_pos != 0) {
 		__data struct private_command_acuator *d = (void *)&nmea2000_data[0];
+		get_rotary_pos();
 		msg.id.id = 0;
 		msg.id.iso_pg = (PRIVATE_COMMAND_ACUATOR >> 8) & 0xff;
 		msg.id.daddr = nmea2000_command_address;
 		msg.id.priority = NMEA2000_PRIORITY_INFO;
 		msg.dlc = sizeof(struct private_command_acuator);
 		msg.data = &nmea2000_data[0];
-		d->move = rotary_pos;
+		d->move = saved_rotary_pos;
 		if (! nmea2000_send_single_frame(&msg))
 			printf("send PRIVATE_COMMAND_ACUATOR failed\n");
-		rotary_pos = 0;
 		last_xmit = timer0_read();
 	}
 	if (switch_events.s.sw3) {
@@ -2490,9 +2489,11 @@ void irqh_timer2(void) __naked
 	}
 #ifndef DISPLAY_FAKE
 	rotary_a = rotary_a << 1;
+	rotary_a &= (unsigned char)0xf;
 	if (ROTARY_A)
 		rotary_a |= (unsigned char)1;
 	rotary_b = rotary_b << 1;
+	rotary_b &= (unsigned char)0xf;
 	if (ROTARY_B)
 		rotary_b |= (unsigned char)1;
 	if (rotary_a == 0x0f) {
