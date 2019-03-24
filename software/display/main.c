@@ -55,7 +55,8 @@ void _startup (void) __naked;
 
 unsigned long nmea2000_user_id; 
 
-unsigned int timer0_read(void);
+unsigned short timer0_read(void);
+void delay(unsigned short);
 #pragma callee_saves timer0_read
 
 /* hardware defines */
@@ -110,30 +111,30 @@ static unsigned int received_cog; /* also use HEADING_INVALID */
 static unsigned char received_speed;
 static unsigned char received_speedd;
 static unsigned char cogsog_changed;
-unsigned int last_nmea2000_cogsog;
+unsigned short last_nmea2000_cogsog;
 
 static long received_xte; /* in m * 100 */
 #define XTE_INVALID 0
 static unsigned char xte_changed;
-unsigned int last_nmea2000_xte;
+unsigned short last_nmea2000_xte;
 
 static unsigned int received_towp_cog; /* also use HEADING_INVALID */
 static unsigned long received_towp_dist; /* in m  * 100 */
 static          char received_towp_speed;
 static unsigned char received_towp_speedd;
 static unsigned char towp_changed;
-unsigned int last_nmea2000_navdata;
+unsigned short last_nmea2000_navdata;
 
 unsigned char nmea2000_capteur_address;
-unsigned int last_capteur_data;
+unsigned short last_capteur_data;
 unsigned char nmea2000_command_address;
-unsigned int last_command_data;
+unsigned short last_command_data;
 
 unsigned char received_hours;
 #define HOUR_INVALID 0xff
 int received_minutes;
 unsigned char datetime_changed;
-unsigned int last_datetime_data;
+unsigned short last_datetime_data;
 
 static union command_errors cmderr_list;
 int command_received_heading;
@@ -143,7 +144,7 @@ char received_param_slot;
 int command_target_heading;
 struct private_command_factors command_factors;
 
-static volatile int counter_1hz;
+static volatile unsigned short counter_1hz;
 static volatile unsigned int softintrs;
 #define INT_1HZ		0x0001
 #define INT_SW_R	0x0002
@@ -172,6 +173,7 @@ union inputs_status {
 
 static union inputs_status inputs_status;
 static volatile char rotary_pos;
+static char saved_rotary_pos;
 static unsigned char rotary_a;
 static unsigned char rotary_b;
 static unsigned char sw1;
@@ -193,6 +195,14 @@ union switch_events {
 };
 static union switch_events switch_events;
 
+static void get_rotary_pos(void) 
+{
+		INTCONbits.GIE_GIEH=0;
+		saved_rotary_pos = rotary_pos;
+		rotary_pos = 0;
+		softintrs &= ~INT_SW_R;
+		INTCONbits.GIE_GIEH=1;
+}
 #define CLRWDT __asm__("clrwdt")
 
 unsigned char backlight_pr;
@@ -214,7 +224,7 @@ static void clearline(unsigned char) __wparam;
 enum display_page display_page;
 enum display_page previous_display_page;
 enum display_page next_display_page;
-unsigned int last_display_update;
+unsigned short last_display_update;
 
 static char page_displaymenu(const struct page_menu_entry *, char, char);
 
@@ -1091,7 +1101,7 @@ page_engageddata(char pagechange) __wparam
 static void
 page_act(char pagechange) __wparam
 {
-	static unsigned int last_xmit;
+	static unsigned short last_xmit;
 	if (pagechange) {
 		send_command_engage(AUTO_STANDBY, received_param_slot);
 		sprintf(lcd_displaybuf, "GO");
@@ -1330,43 +1340,49 @@ page_light(char pagechange) __wparam
 		lcd_line = DISPLAY_H - 1;
 		lcd_col = 0;
 		displaybuf_small();
-		rotary_pos = backlight_pr;
 	}
 	if (softintrs & INT_SW_R) {
+		short tmp_backlight_pr;
 		val_changed = 1;
-		softintrs &= ~INT_SW_R;
-		if (rotary_pos < 1)
-			rotary_pos = 1;
-		if (rotary_pos > 125)
-			rotary_pos = 125;
-		backlight_pr = rotary_pos;
+		get_rotary_pos();
+		tmp_backlight_pr = backlight_pr;
+		tmp_backlight_pr += saved_rotary_pos;
+		if (tmp_backlight_pr < 1)
+			tmp_backlight_pr = 1;
+		if (tmp_backlight_pr > 250)
+			tmp_backlight_pr = 250;
+		backlight_pr = tmp_backlight_pr;
 		sw_beep();
 	}
 	if (val_changed || pagechange) {
 		CCPR2L = backlight_pr;
 		A0 = A0_CTRL;
+		delay(10);
 		spi_write(PAGE_ADDR(1));
 		spi_write(COL_ADDR_H(DISPLAY_W / 2 - (126 / 2) - 1));
 		spi_write(COL_ADDR_L(DISPLAY_W / 2 - (126 / 2) - 1));
 		A0 = A0_DISP;
+		delay(10);
 		for (i = 0; i < 126; i++) {
-			if (i <= backlight_pr || i % 25 == 0)
+			if (i <= backlight_pr / 2 || i % 25 == 0)
 				spi_write(0xff);
 			else
 				spi_write(0x01);
 		}
 		A0 = A0_CTRL;
+		delay(10);
 		spi_write(PAGE_ADDR(2));
 		spi_write(COL_ADDR_H(DISPLAY_W / 2 - (126 / 2) - 1));
 		spi_write(COL_ADDR_L(DISPLAY_W / 2 - (126 / 2) - 1));
 		A0 = A0_DISP;
+		delay(10);
 		for (i = 0; i < 126; i++) {
-			if (i <= backlight_pr || i % 25 == 0)
+			if (i <= backlight_pr / 2 || i % 25 == 0)
 				spi_write(0xff);
 			else
 				spi_write(0x80);
 		}
-		msg_val = (int)backlight_pr * 100UL / 125UL;
+		msg_val = (int)backlight_pr * 100UL / 2505UL;
 		send_command_light(CONTROL_LIGHT_VAL, msg_val);
 	}
 	if (switch_events.s.sw4) {
@@ -1511,9 +1527,8 @@ page_capcorr(char pagechange) __wparam
 	} else if (received_compass_offset != HEADING_INVALID) {
 		int deg_offset = rad2deg(received_compass_offset) - 180;
 		if (softintrs & INT_SW_R) {
-			softintrs &= ~INT_SW_R;
-			deg_offset += rotary_pos;
-			rotary_pos = 0;
+			get_rotary_pos();
+			deg_offset += saved_rotary_pos;
 		}
 		if (deg_offset > 180)
 			deg_offset = -179;
@@ -1636,18 +1651,18 @@ page_conf_cmd_factors(char pagechange) __wparam
 	}
 
 	if (softintrs & INT_SW_R) {
-		softintrs &= ~INT_SW_R;
+		get_rotary_pos();
 		if (edit_factor == 3) {
 			char new_slot;
 			/* select slot */
-			new_slot = last_slot + rotary_pos;
+			new_slot = last_slot + saved_rotary_pos;
 			if (new_slot >= 0) {
 				send_command_request_factors(new_slot);
 				sw_beep();
 			}
 		} else if (selecting == 1) {
 			char new_digit;
-			new_digit = edit_digit - rotary_pos;
+			new_digit = edit_digit - saved_rotary_pos;
 			while  (new_digit < 0) {
 				/* next factor */
 				new_digit += 4;
@@ -1678,16 +1693,16 @@ page_conf_cmd_factors(char pagechange) __wparam
 
 			switch(edit_digit) {
 			case 3:
-				new_factor += (int)rotary_pos * (int)1000;
+				new_factor += (int)saved_rotary_pos * (int)1000;
 				break;
 			case 2:
-				new_factor += (int)rotary_pos * (int)100;
+				new_factor += (int)saved_rotary_pos * (int)100;
 				break;
 			case 1:
-				new_factor += (int)rotary_pos * (int)10;
+				new_factor += (int)saved_rotary_pos * (int)10;
 				break;
 			case 0:
-				new_factor += rotary_pos;
+				new_factor += saved_rotary_pos;
 				break;
 			}
 			if (new_factor >= 0 && new_factor < 10000)
@@ -1696,7 +1711,6 @@ page_conf_cmd_factors(char pagechange) __wparam
 				 command_factors.slot = last_slot;
 				 sw_beep();
 			}
-		rotary_pos = 0;
 	}
 
 	if (switch_events.s.sw4) {
@@ -1764,14 +1778,13 @@ page_conf_cmd_config(char pagechange) __wparam
 
 	if (softintrs & INT_SW_R) {
 		char new_slot;
-		softintrs &= ~INT_SW_R;
+		get_rotary_pos();
 		/* select slot */
-		new_slot = last_slot + rotary_pos;
+		new_slot = last_slot + saved_rotary_pos;
 		if (new_slot >= 0) {
 			send_command_request_factors(new_slot);
 			sw_beep();
 		}
-		rotary_pos = 0;
 	}
 
 	if (switch_events.s.sw4) {
@@ -1915,7 +1928,7 @@ page_cmderr(char pagechange) __wparam
 static void
 sw_beep()
 {
-	// unsigned int count;
+	// unsigned short count;
 	PR4 = SPKR_1000;
 	T4CONbits.TMR4ON = 1;
 	beep_duration = SPKR_1000_D100 / 2; /* 0.05s */
@@ -1954,18 +1967,18 @@ main(void) __naked
 {
 	char c;
 	int second_counts = 0;
-	static unsigned int poll_count;
-	unsigned int count;
+	static unsigned short poll_count;
+	unsigned short count;
 	char new_page;
-	static unsigned int sw1_count;
-	static unsigned int sw2_count;
-	static unsigned int sw3_count;
-	static unsigned int sw4_count;
+	static unsigned short sw1_count;
+	static unsigned short sw2_count;
+	static unsigned short sw3_count;
+	static unsigned short sw4_count;
 
 
 	softintrs = 0;
 	inputs_status.v = 0;
-	counter_1hz = 1000;
+	counter_1hz = 500;
 
 	rotary_pos = 0;
 
@@ -2006,7 +2019,7 @@ main(void) __naked
 	/* configure timer2 for 1Khz interrupt */
 	PMD1bits.TMR2MD=0;
 	T2CON = 0x21; /* b00100001: postscaller 1/5, prescaler 1/4 */
-	PR2 = 125; /* 1khz output */
+	PR2 = 250; /* 500hz output */
 	T2CONbits.TMR2ON = 1;
 	PIR1bits.TMR2IF = 0;
 	IPR1bits.TMR2IP = 1; /* high priority interrupt */
@@ -2048,8 +2061,8 @@ main(void) __naked
 	nmea2000_init();
 
 	backlight_pr = eeprom_read(BACKLIGHT_ADDR);
-	if (backlight_pr < 1 || backlight_pr > 125)
-		backlight_pr = 125 / 2;
+	if (backlight_pr < 1 || backlight_pr > 250)
+		backlight_pr = 250 / 2;
 
 	/* port C 2 output (backlight), using PWM2 */
 	CCPTMRSbits.C2TSEL=0; /* select timer2 */
@@ -2401,7 +2414,7 @@ end:
 	INTCONbits.GIE=0;  /* disable interrrupts */
 }
 
-unsigned int
+unsigned short
 timer0_read() __naked
 {
 	/* return TMR0L | (TMR0H << 8), reading TMR0L first */
@@ -2410,6 +2423,14 @@ timer0_read() __naked
 	movff	_TMR0H, _PRODL
 	return
 	__endasm;
+}
+
+void
+delay(unsigned short d)
+{
+	short start = timer0_read();
+	while (timer0_read() < start + d)
+		; /* wait */
 }
 
 /* Vectors */
@@ -2468,7 +2489,7 @@ void irqh_timer2(void) __naked
 	__endasm;
 	counter_1hz--;
 	if (counter_1hz == 0) {
-		counter_1hz = 1000;
+		counter_1hz = 500;
 		softintrs |= INT_1HZ;
 	}
 #ifndef DISPLAY_FAKE
@@ -2478,7 +2499,7 @@ void irqh_timer2(void) __naked
 	rotary_b = rotary_b << 1;
 	if (ROTARY_B)
 		rotary_b |= (unsigned char)1;
-	if (rotary_a == 0xff) {
+	if (rotary_a == 0x0f) {
 		if (!inputs_status.s.rotary_a) { /* rising edge on A */
 			if (inputs_status.s.pending_b) {
 				/* already got rising edge on B */
@@ -2494,7 +2515,7 @@ void irqh_timer2(void) __naked
 		inputs_status.s.rotary_a = 0;
 		inputs_status.s.pending_a = 0;
 	}
-	if (rotary_b == 0xff) {
+	if (rotary_b == 0x0f) {
 		if (!inputs_status.s.rotary_b) { /* rising edge on B */
 			if (inputs_status.s.pending_a) {
 				/* already got rising edge on A */
