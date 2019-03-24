@@ -1357,12 +1357,10 @@ page_light(char pagechange) __wparam
 	if (val_changed || pagechange) {
 		CCPR2L = backlight_pr;
 		A0 = A0_CTRL;
-		delay(10);
 		spi_write(PAGE_ADDR(1));
 		spi_write(COL_ADDR_H(DISPLAY_W / 2 - (126 / 2) - 1));
 		spi_write(COL_ADDR_L(DISPLAY_W / 2 - (126 / 2) - 1));
 		A0 = A0_DISP;
-		delay(10);
 		for (i = 0; i < 126; i++) {
 			if (i <= backlight_pr / 2 || i % 25 == 0)
 				spi_write(0xff);
@@ -1370,19 +1368,17 @@ page_light(char pagechange) __wparam
 				spi_write(0x01);
 		}
 		A0 = A0_CTRL;
-		delay(10);
 		spi_write(PAGE_ADDR(2));
 		spi_write(COL_ADDR_H(DISPLAY_W / 2 - (126 / 2) - 1));
 		spi_write(COL_ADDR_L(DISPLAY_W / 2 - (126 / 2) - 1));
 		A0 = A0_DISP;
-		delay(10);
 		for (i = 0; i < 126; i++) {
 			if (i <= backlight_pr / 2 || i % 25 == 0)
 				spi_write(0xff);
 			else
 				spi_write(0x80);
 		}
-		msg_val = (int)backlight_pr * 100UL / 2505UL;
+		msg_val = (int)backlight_pr * 100UL / 250UL;
 		send_command_light(CONTROL_LIGHT_VAL, msg_val);
 	}
 	if (switch_events.s.sw4) {
@@ -2016,7 +2012,7 @@ main(void) __naked
 	INTCONbits.TMR0IE = 0; /* no interrupt */
 	T0CONbits.TMR0ON = 1;
 
-	/* configure timer2 for 1Khz interrupt */
+	/* configure timer2 for 500hz interrupt */
 	PMD1bits.TMR2MD=0;
 	T2CON = 0x21; /* b00100001: postscaller 1/5, prescaler 1/4 */
 	PR2 = 250; /* 500hz output */
