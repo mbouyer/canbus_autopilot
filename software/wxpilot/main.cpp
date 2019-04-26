@@ -29,6 +29,8 @@
 #include <wx/config.h>
 #include "wxpilot.h"
 #include "pilotparams.h"
+#include "loadpilotparams.h"
+#include "savepilotparams.h"
 #include "pilotstatus.h"
 #include <N2K/NMEA2000.h>
 #include <N2K/NMEA2000Properties.h>
@@ -38,6 +40,8 @@
 
 const int NUMBER_UPDATE_ID = 100000;
 const int myID_F_N2KCONF =	10;
+const int myID_F_PLOAD =	11;
+const int myID_F_PSAVE =	12;
 const int myID_DATAUP =		100;
 
 class PilotFrame : public wxFrame
@@ -75,7 +79,11 @@ private:
 	pilotParams *pilotparams;
 	pilotStatus *pilotstatus;
 
+	savePilotParams *saveparams;
+
 	void OnN2KConfig(wxCommandEvent & event);
+	void OnParamsLoad(wxCommandEvent & event);
+	void OnParamsSave(wxCommandEvent & event);
 	void OnDataUpdate(wxCommandEvent & event);
 	void OnQuit(wxCommandEvent & event);
 	void OnClose(wxCloseEvent & event);
@@ -85,6 +93,7 @@ PilotFrame::PilotFrame(const wxString& title)
 	: wxFrame(NULL, wxID_ANY, title)
 {
 	int x, y, w, h;
+	saveparams = NULL;
 	config = new wxConfig(wxpilot::AppName());
 	if (config) {
 		x = config->ReadLong("/Position/X", -1);
@@ -102,6 +111,8 @@ PilotFrame::PilotFrame(const wxString& title)
 	menubar = new wxMenuBar;
 	file = new wxMenu;
 	file->Append(myID_F_N2KCONF, _T("N2k Config"));
+	file->Append(myID_F_PLOAD, _T("&Load params"));
+	file->Append(myID_F_PSAVE, _T("&Save params"));
 	file->Append(wxID_EXIT, _T("&Quit"));
 	menubar->Append(file, _T("&File"));
 	SetMenuBar(menubar);
@@ -109,6 +120,10 @@ PilotFrame::PilotFrame(const wxString& title)
 		wxCloseEventHandler(PilotFrame::OnClose));
 	Connect(myID_F_N2KCONF, wxEVT_COMMAND_MENU_SELECTED,
 		wxCommandEventHandler(PilotFrame::OnN2KConfig));
+	Connect(myID_F_PLOAD, wxEVT_COMMAND_MENU_SELECTED,
+		wxCommandEventHandler(PilotFrame::OnParamsLoad));
+	Connect(myID_F_PSAVE, wxEVT_COMMAND_MENU_SELECTED,
+		wxCommandEventHandler(PilotFrame::OnParamsSave));
 	Connect(wxID_EXIT, wxEVT_COMMAND_MENU_SELECTED,
 		wxCommandEventHandler(PilotFrame::OnQuit));
 	Connect(myID_DATAUP, wxEVT_COMMAND_TEXT_UPDATED,
@@ -138,6 +153,23 @@ void PilotFrame::OnN2KConfig(wxCommandEvent & WXUNUSED(event))
 
 }
 
+void PilotFrame::OnParamsLoad(wxCommandEvent & WXUNUSED(event))
+{
+	loadPilotParams loadparams(this);
+	loadparams.doLoad();
+	pilotparams->update();
+}
+
+void PilotFrame::OnParamsSave(wxCommandEvent & WXUNUSED(event))
+{
+	saveparams = new savePilotParams(this);
+	if (!saveparams->doSave()) {
+		delete saveparams;
+		saveparams = NULL;
+	}
+}
+
+
 void PilotFrame::wake(dataup_t t)
 {
 	wxCommandEvent event(wxEVT_COMMAND_TEXT_UPDATED, myID_DATAUP);
@@ -163,6 +195,12 @@ void PilotFrame::OnDataUpdate(wxCommandEvent & event)
 		pilotparams->setSlot(group);
 		break;
 	case PilotFrame::dataup_t::data_params:
+		if (saveparams != NULL) {
+			if (!saveparams->setValues(paramslot, paramvalues)) {
+				delete saveparams;
+				saveparams = NULL;
+			}
+		}
 		pilotparams->setValues(paramslot, paramvalues);
 		break;
 	}

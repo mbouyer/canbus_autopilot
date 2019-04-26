@@ -134,7 +134,7 @@ pilotParams::OnReset(wxCommandEvent & event)
 bool
 pilotParams::requestSlot(int s)
 {
-	command_factors_request_tx->update(slot);
+	command_factors_request_tx->update(s);
 	return nmea2000P->send_bypgn(PRIVATE_COMMAND_FACTORS_REQUEST, true);
 }
 
@@ -166,4 +166,10 @@ pilotParams::setValues(int s, int v[NFACTORS])
 	for (int i = 0; i < NFACTORS; i++) {
 		param[i]->SetValue(v[i]);
 	}
+}
+
+void
+pilotParams::update()
+{
+	requestSlot(slot);
 }

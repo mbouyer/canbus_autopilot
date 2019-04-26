@@ -26,37 +26,22 @@
  */
 
 #include <wxpilot.h>
-#include <wx/combobox.h>
-#include <widgets/wxNumberControl.h>
 #include <N2K/nmea2000_defs_tx.h>
 #define NPARAMS 6
 
-class pilotParams: public wxPanel
+class savePilotParams
 {
   public:
-	pilotParams(wxWindow *parent, wxWindowID id=wxID_ANY);
-	void setValues(int, int values[NFACTORS]);
-	bool setSlot(int slot);
-	void update(void);
+	savePilotParams(wxWindow *parent);
+	bool setValues(int, int values[NFACTORS]);
+	bool doSave(void);
   private:
-	wxBoxSizer *mainsizer;
-	wxBoxSizer *controlsizer;
-	wxFlexGridSizer *inputsizer;
-	wxComboBox *paramsGroups;
-	wxArrayString *paramsGroupsList;
-	wxButton *applyButton;
-	wxButton *resetButton;
+	wxFileDialog *filedialog;
+	wxString fileName;
+	wxFileConfig config;
 
-	wxNumberControl *param[NFACTORS];
-
-	private_command_factors_tx *command_factors_tx;
 	private_command_factors_request_tx *command_factors_request_tx;
-
-	int values[NFACTORS];
-	int slot;
-
 	bool requestSlot(int);
-	void OnParamGroupSelect(wxCommandEvent & event);
-	void OnApply(wxCommandEvent & event);
-	void OnReset(wxCommandEvent & event);
+
+	int slot;
 };

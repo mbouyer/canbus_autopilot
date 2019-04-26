@@ -98,6 +98,8 @@ SET(N2KHDRS
 SET(HDRS
     wxpilot.h
     pilotparams.h
+    savepilotparams.h
+    loadpilotparams.h
     pilotstatus.h
     widgets/wxNumberControl.h
     widgets/wxCompass.h
@@ -119,6 +121,8 @@ SET(N2KSRCS
 SET(SRCS
     main.cpp
     pilotparams.cpp
+    savepilotparams.cpp
+    loadpilotparams.cpp
     pilotstatus.cpp
     widgets/wxNumberControl.cpp
     widgets/wxCompass.cpp
