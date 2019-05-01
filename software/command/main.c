@@ -319,6 +319,7 @@ user_receive()
 				/* init rudder pos */
 				rudder_cons = previous_rudder =
 				    a2d_rudder;
+				target_rudder = rudder_cons;
 				/* init PID */
 				previous_rot_rate = received_rot_rate;
 				/* power on but idle */
