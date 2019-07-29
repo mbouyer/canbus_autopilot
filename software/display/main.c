@@ -249,7 +249,8 @@ static void sw_beep(void);
 static void check_light(void);
 static unsigned char check_light_long;
 
-static char next_page_from_auto_mode(void)
+static char
+next_page_from_auto_mode(void)
 {
 	if (received_auto_mode == 0)
 		return MAIN_DATA;
@@ -274,6 +275,14 @@ send_command_engage(unsigned char mode, char slot)
 	msg.data = &nmea2000_data[0];
 	if (! nmea2000_send_single_frame(&msg))
 		printf("send PRIVATE_COMMAND_ENGAGE failed\n");
+}
+
+static void
+switch_to_standby(void)
+{
+	command_target_heading = deg2rad(rad2deg(received_heading));
+	send_command_engage(AUTO_STANDBY, received_param_slot);
+	next_display_page = ACT_PAGE;
 }
 
 static void
@@ -997,8 +1006,7 @@ page_maindata(char pagechange) __wparam
 		next_display_page = MAIN_MENU;
 	}
 	if (switch_events.s.sw2) {
-		next_display_page = ACT_PAGE;
-		command_target_heading = deg2rad(rad2deg(received_heading));
+		switch_to_standby();
 	}
 }
 
@@ -1092,8 +1100,7 @@ page_engageddata(char pagechange) __wparam
 		next_display_page = COGSOG_DATA;
 	}
 	if (switch_events.s.sw2) {
-		send_command_engage(AUTO_STANDBY, received_param_slot);
-		next_display_page = ACT_PAGE;
+		switch_to_standby();
 	}
 }
 
@@ -1102,7 +1109,6 @@ page_act(char pagechange) __wparam
 {
 	static unsigned short last_xmit;
 	if (pagechange) {
-		send_command_engage(AUTO_STANDBY, received_param_slot);
 		sprintf(lcd_displaybuf, "GO");
 		lcd_line = 0;
 		lcd_col = 0;
@@ -1180,8 +1186,7 @@ page_cogsog(char pagechange) __wparam
 		next_display_page = MAIN_MENU;
 	}
 	if (switch_events.s.sw2) {
-		send_command_engage(AUTO_STANDBY, received_param_slot);
-		next_display_page = ACT_PAGE;
+		switch_to_standby();
 	}
 }
 
@@ -1282,8 +1287,7 @@ page_towp(char pagechange) __wparam
 		next_display_page = MAIN_MENU;
 	}
 	if (switch_events.s.sw2) {
-		send_command_engage(AUTO_STANDBY, received_param_slot);
-		next_display_page = ACT_PAGE;
+		switch_to_standby();
 	}
 }
 
@@ -1320,8 +1324,7 @@ page_time(char pagechange) __wparam
 		next_display_page = MAIN_MENU;
 	}
 	if (switch_events.s.sw2) {
-		send_command_engage(AUTO_STANDBY, received_param_slot);
-		next_display_page = ACT_PAGE;
+		switch_to_standby();
 	}
 }
 
