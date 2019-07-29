@@ -1,0 +1,461 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# Connector_Conn_Coaxial
+#
+DEF Connector_Conn_Coaxial J 0 40 Y N 1 F N
+F0 "J" 10 120 50 H V C CNN
+F1 "Connector_Conn_Coaxial" 115 0 50 V V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ *BNC*
+ *SMA*
+ *SMB*
+ *SMC*
+ *Cinch*
+$ENDFPLIST
+DRAW
+A -2 0 71 1636 0 0 1 10 N -70 20 70 0
+A -1 0 71 0 -1638 0 1 10 N 70 0 -70 -20
+C 0 0 20 0 1 8 N
+P 2 0 1 0 -100 0 -20 0 N
+P 2 0 1 0 0 -100 0 -70 N
+X In 1 -200 0 100 R 50 50 1 1 P
+X Ext 2 0 -200 100 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_C_Small
+#
+DEF Device_C_Small C 0 10 N N 1 F N
+F0 "C" 10 70 50 H V L CNN
+F1 "Device_C_Small" 10 -80 50 H V L CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ C_*
+$ENDFPLIST
+DRAW
+P 2 0 1 13 -60 -20 60 -20 N
+P 2 0 1 12 -60 20 60 20 N
+X ~ 1 0 100 80 D 50 50 1 1 P
+X ~ 2 0 -100 80 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_Crystal_Small
+#
+DEF Device_Crystal_Small Y 0 40 N N 1 F N
+F0 "Y" 0 100 50 H V C CNN
+F1 "Device_Crystal_Small" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Crystal*
+$ENDFPLIST
+DRAW
+S -30 -60 30 60 0 1 0 N
+P 2 0 1 15 -50 -30 -50 30 N
+P 2 0 1 15 50 -30 50 30 N
+X 1 1 -100 0 50 R 50 50 1 1 P
+X 2 2 100 0 50 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_D_Schottky_Small
+#
+DEF Device_D_Schottky_Small D 0 10 N N 1 F N
+F0 "D" -50 80 50 H V L CNN
+F1 "Device_D_Schottky_Small" -280 -80 50 H V L CNN
+F2 "" 0 0 50 V I C CNN
+F3 "" 0 0 50 V I C CNN
+$FPLIST
+ TO-???*
+ *_Diode_*
+ *SingleDiode*
+ D_*
+$ENDFPLIST
+DRAW
+P 2 0 1 0 -30 -40 -30 40 N
+P 2 0 1 0 -30 0 30 0 N
+P 3 0 1 0 -30 -40 -20 -40 -20 -30 N
+P 3 0 1 0 -30 40 -40 40 -40 30 N
+P 4 0 1 0 30 -40 -30 0 30 40 30 -40 N
+X K 1 -100 0 70 R 50 50 1 1 P
+X A 2 100 0 70 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_LED
+#
+DEF Device_LED D 0 40 N N 1 F N
+F0 "D" 0 100 50 H V C CNN
+F1 "Device_LED" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ LED*
+ LED_SMD:*
+ LED_THT:*
+$ENDFPLIST
+DRAW
+P 2 0 1 8 -50 -50 -50 50 N
+P 2 0 1 0 -50 0 50 0 N
+P 4 0 1 8 50 -50 50 50 -50 0 50 -50 N
+P 5 0 1 0 -120 -30 -180 -90 -150 -90 -180 -90 -180 -60 N
+P 5 0 1 0 -70 -30 -130 -90 -100 -90 -130 -90 -130 -60 N
+X K 1 -150 0 100 R 50 50 1 1 P
+X A 2 150 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_R_Small
+#
+DEF Device_R_Small R 0 10 N N 1 F N
+F0 "R" 30 20 50 H V L CNN
+F1 "Device_R_Small" 30 -40 50 H V L CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ R_*
+$ENDFPLIST
+DRAW
+S -30 70 30 -70 0 1 8 N
+X ~ 1 0 100 30 D 50 50 1 1 P
+X ~ 2 0 -100 30 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Diode_1.5KExxA
+#
+DEF Diode_1.5KExxA D 0 40 N N 1 F N
+F0 "D" 0 100 50 H V C CNN
+F1 "Diode_1.5KExxA" 0 -100 50 H V C CNN
+F2 "Diode_THT:D_DO-201AE_P15.24mm_Horizontal" 0 -200 50 H I C CNN
+F3 "" -50 0 50 H I C CNN
+ALIAS 1N62xxA 1N630xA
+$FPLIST
+ D?DO?201AE*
+$ENDFPLIST
+DRAW
+P 3 0 1 8 -30 50 -50 50 -50 -50 N
+P 4 0 1 8 50 50 50 -50 -50 0 50 50 N
+X A1 1 -150 0 100 R 50 50 1 1 P
+X A2 2 150 0 100 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# power_+12V
+#
+DEF power_+12V #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_+12V" 0 140 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X +12V 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_+5V
+#
+DEF power_+5V #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_+5V" 0 140 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X +5V 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_PWR_FLAG
+#
+DEF power_PWR_FLAG #FLG 0 0 N N 1 F P
+F0 "#FLG" 0 75 50 H I C CNN
+F1 "power_PWR_FLAG" 0 150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 6 0 1 0 0 0 0 50 -40 75 0 100 40 75 0 50 N
+X pwr 1 0 0 0 U 50 50 0 0 w
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_+3.3V-RESCUE-capteur-capteur-rescue
+#
+DEF remote-control-rescue_+3.3V-RESCUE-capteur-capteur-rescue #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -40 30 H I C CNN
+F1 "remote-control-rescue_+3.3V-RESCUE-capteur-capteur-rescue" 0 110 30 H V C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+C 0 60 20 0 1 0 N
+P 3 0 1 0 0 0 0 40 0 40 N
+X +3.3V 1 0 0 0 U 30 30 0 0 W N
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_C-RESCUE-capteur-capteur-rescue
+#
+DEF remote-control-rescue_C-RESCUE-capteur-capteur-rescue C 0 10 N Y 1 F N
+F0 "C" 0 100 40 H V L CNN
+F1 "remote-control-rescue_C-RESCUE-capteur-capteur-rescue" 6 -85 40 H V L CNN
+F2 "" 38 -150 30 H V C CNN
+F3 "" 0 0 60 H V C CNN
+$FPLIST
+ SM*
+ C?
+ C1-1
+$ENDFPLIST
+DRAW
+P 2 0 1 20 -80 -30 80 -30 N
+P 2 0 1 20 -80 30 80 30 N
+X ~ 1 0 200 170 D 40 40 1 1 P
+X ~ 2 0 -200 170 U 40 40 1 1 P
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_CONN_4-capteur-rescue
+#
+DEF remote-control-rescue_CONN_4-capteur-rescue P 0 40 Y N 1 F N
+F0 "P" -50 0 50 V V C CNN
+F1 "remote-control-rescue_CONN_4-capteur-rescue" 50 0 50 V V C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+S -100 200 100 -200 0 1 0 N
+X P1 1 -350 150 250 R 50 50 1 1 P I
+X P2 2 -350 50 250 R 50 50 1 1 P I
+X P3 3 -350 -50 250 R 50 50 1 1 P I
+X P4 4 -350 -150 250 R 50 50 1 1 P I
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_CONN_6-capteur-rescue
+#
+DEF remote-control-rescue_CONN_6-capteur-rescue P 0 30 Y N 1 F N
+F0 "P" -50 0 60 V V C CNN
+F1 "remote-control-rescue_CONN_6-capteur-rescue" 50 0 60 V V C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+S -100 300 100 -300 0 1 0 N
+X 1 1 -350 250 250 R 60 60 1 1 P I
+X 2 2 -350 150 250 R 60 60 1 1 P I
+X 3 3 -350 50 250 R 60 60 1 1 P I
+X 4 4 -350 -50 250 R 60 60 1 1 P I
+X 5 5 -350 -150 250 R 60 60 1 1 P I
+X 6 6 -350 -250 250 R 60 60 1 1 P I
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_CP1-RESCUE-capteur-capteur-rescue
+#
+DEF remote-control-rescue_CP1-RESCUE-capteur-capteur-rescue C 0 10 N N 1 F N
+F0 "C" 50 100 50 H V L CNN
+F1 "remote-control-rescue_CP1-RESCUE-capteur-capteur-rescue" 50 -100 50 H V L CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+$FPLIST
+ CP*
+ SM*
+$ENDFPLIST
+DRAW
+A 0 -200 180 563 1236 0 1 15 N 100 -50 -100 -50
+T 0 -50 100 80 0 0 0 + Normal 0 C C
+P 4 0 1 15 -100 50 100 50 50 50 50 50 N
+X ~ 1 0 200 150 D 40 40 1 1 P
+X ~ 2 0 -200 180 U 40 40 1 1 P
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_C_Small-Device
+#
+DEF remote-control-rescue_C_Small-Device C 0 10 N N 1 F N
+F0 "C" 10 70 50 H V L CNN
+F1 "remote-control-rescue_C_Small-Device" 10 -80 50 H V L CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ C_*
+$ENDFPLIST
+DRAW
+P 2 0 1 13 -60 -20 60 -20 N
+P 2 0 1 12 -60 20 60 20 N
+X ~ 1 0 100 80 D 50 50 1 1 P
+X ~ 2 0 -100 80 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_GND-RESCUE-capteur-capteur-rescue
+#
+DEF remote-control-rescue_GND-RESCUE-capteur-capteur-rescue #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 0 30 H I C CNN
+F1 "remote-control-rescue_GND-RESCUE-capteur-capteur-rescue" 0 -70 30 H I C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+P 4 0 1 0 -50 0 0 -50 50 0 -50 0 N
+X GND 1 0 0 0 U 30 30 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_MCP2562-capteur-rescue
+#
+DEF remote-control-rescue_MCP2562-capteur-rescue U 0 40 Y Y 2 L N
+F0 "U" -400 450 50 H V L BNN
+F1 "remote-control-rescue_MCP2562-capteur-rescue" -400 -500 50 H V L BNN
+F2 "MCP2562" 0 150 50 H I C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+T 1 72 184 56 0 2 0 VDD Normal 1 C C
+T 1 72 184 56 0 2 0 VDD Normal 1 C C
+T 1 72 -216 56 0 2 0 VSS Normal 1 C C
+T 1 72 -216 56 0 2 0 VSS Normal 1 C C
+P 2 1 0 0 -400 -400 300 -400 N
+P 2 1 0 0 -400 400 -400 -400 N
+P 2 1 0 0 300 -400 300 400 N
+P 2 1 0 0 300 400 -400 400 N
+X TXD 1 -600 200 200 R 40 40 1 1 I
+X VSS 2 0 -600 200 U 40 40 1 1 W
+X VDD 3 0 600 200 D 40 40 1 1 W
+X RXD 4 -600 0 200 R 40 40 1 1 O
+X VIO 5 500 -300 200 L 40 40 1 1 W
+X CANL 6 500 0 200 L 40 40 1 1 B
+X CANH 7 500 200 200 L 40 40 1 1 B
+X STB 8 -600 -200 200 R 40 40 1 1 I
+X VSS 2 0 -300 200 U 40 40 2 1 W
+X VDD 3 0 300 200 D 40 40 2 1 W
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_PIC18F2xK80-capteur-rescue
+#
+DEF remote-control-rescue_PIC18F2xK80-capteur-rescue U 0 40 Y Y 1 F N
+F0 "U" 100 1300 50 H V L BNN
+F1 "remote-control-rescue_PIC18F2xK80-capteur-rescue" 300 -1300 50 H V L BNN
+F2 "" 500 1000 50 H I C CNN
+F3 "" 500 850 60 H V C CNN
+$FPLIST
+ 28
+$ENDFPLIST
+DRAW
+P 2 1 0 0 -800 -1200 800 -1200 N
+P 2 1 0 0 -800 1250 -800 -1200 N
+P 2 1 0 0 800 -1200 800 1250 N
+P 2 1 0 0 800 1250 -800 1250 N
+X RE3/~MCLR 1 1000 1200 200 L 40 40 1 1 I
+X OSC2/CLKOUT/RA6 10 1000 500 200 L 40 40 1 1 B
+X RC0/SOSCO/CLKI 11 1000 400 200 L 40 40 1 1 B
+X RC1/ISOSCI 12 1000 300 200 L 40 40 1 1 B
+X RC2/T1G/CCP2 13 1000 200 200 L 40 40 1 1 B
+X RC3/REFO/SCL/SCK 14 1000 100 200 L 40 40 1 1 B
+X RC4/SDA/SDI 15 1000 0 200 L 40 40 1 1 B
+X RC5/SDO 16 1000 -100 200 L 40 40 1 1 B
+X RC6/CANTX/TX1/CK1/CCP3 17 1000 -200 200 L 40 40 1 1 B
+X RC7/CANRX/RX1/DT1/CCP4 18 1000 -300 200 L 50 50 1 1 I
+X VSS 19 -1000 300 200 R 40 40 1 1 W
+X RA0/CVREF/AN0/ULPWU 2 1000 1100 200 L 40 40 1 1 B
+X VDD 20 -1000 150 200 R 40 40 1 1 W
+X RB0/AN10/C1INA/FLT0/INT0 21 1000 -400 200 L 40 40 1 1 B
+X RB1/AN8/C1INB/P1B/CTDIN/INT1 22 1000 -500 200 L 40 40 1 1 B
+X RB2/CANTX/C1OUT/P1C/CTED1/INT2 23 1000 -600 200 L 40 40 1 1 B
+X RB3/CANRX/C2OUT/P1D/CTED2/INT3 24 1000 -700 200 L 40 40 1 1 B
+X RB4/AN9/C2INA/ECCP1/P1A/CTPLS/KBI 25 1000 -800 200 L 40 40 1 1 B
+X RB5/T0CKI/T3CKI/CCP5/KBI1 26 1000 -900 200 L 40 40 1 1 B
+X RB6/PGC/TX2/CK2/KBI2 27 1000 -1000 200 L 40 40 1 1 B
+X RB7/PGD/T3G/RX2/DT2/KBI3 28 1000 -1100 200 L 40 40 1 1 B
+X RA1/AN1 3 1000 1000 200 L 40 40 1 1 B
+X RA2/Vref-/AN2 4 1000 900 200 L 40 40 1 1 B
+X RA3/Vref+/AN3 5 1000 800 200 L 40 40 1 1 B
+X VDDCORE/Vcap 6 -1000 600 200 R 40 40 1 1 B
+X RA5/AN4/C2INB/HLVDIN/T1CKI/SS/CTMUI 7 1000 700 200 L 40 40 1 1 B
+X VSS2 8 -1000 450 200 R 40 40 1 1 W
+X OSC1/CLKIN/RA7 9 1000 600 200 L 40 40 1 1 B
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_R-RESCUE-capteur-capteur-rescue
+#
+DEF remote-control-rescue_R-RESCUE-capteur-capteur-rescue R 0 0 N Y 1 F N
+F0 "R" 80 0 40 V V C CNN
+F1 "remote-control-rescue_R-RESCUE-capteur-capteur-rescue" 7 1 40 V V C CNN
+F2 "" -70 0 30 V V C CNN
+F3 "" 0 0 30 H V C CNN
+$FPLIST
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$ENDFPLIST
+DRAW
+S -40 150 40 -150 0 1 12 N
+X ~ 1 0 250 100 D 60 60 1 1 P
+X ~ 2 0 -250 100 U 60 60 1 1 P
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_ZPT-RFsol
+#
+DEF remote-control-rescue_ZPT-RFsol U 0 40 Y Y 1 F N
+F0 "U" -50 -350 50 H V C CNN
+F1 "remote-control-rescue_ZPT-RFsol" 0 350 50 H V C CNN
+F2 "" -150 0 50 H I C CNN
+F3 "" -150 0 50 H I C CNN
+DRAW
+S -350 300 350 -300 0 1 0 N
+X ANT 1 -550 250 200 R 50 39 1 1 P
+X OP3 10 550 50 200 L 50 39 1 1 O
+X OP2 11 550 150 200 L 50 39 1 1 O
+X OP1 12 550 250 200 L 50 39 1 1 O
+X GND 2 -550 150 200 R 50 39 1 1 W
+X sleep 3 -550 50 200 R 50 39 1 1 I
+X VCC 4 -550 -50 200 R 50 39 1 1 W
+X LED/LRN 5 -550 -150 200 R 50 39 1 1 B
+X SERIAL_OUT 6 -550 -250 200 R 50 39 1 1 O
+X NC 7 550 -250 200 L 50 39 1 1 N
+X MOM/LAT 8 550 -150 200 L 50 39 1 1 I
+X OP4 9 550 -50 200 L 50 39 1 1 O
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_uA78M05-capteur-rescue
+#
+DEF remote-control-rescue_uA78M05-capteur-rescue U 0 30 N Y 1 F N
+F0 "U" 150 -196 60 H V C CNN
+F1 "remote-control-rescue_uA78M05-capteur-rescue" 0 200 60 H V C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+S -200 -150 200 150 0 1 0 N
+X VI 1 -400 50 200 R 40 40 1 1 W
+X GND 2 0 -250 100 U 40 40 1 1 W
+X VO 3 400 50 200 L 40 40 1 1 w
+ENDDRAW
+ENDDEF
+#
+# remote-control-rescue_uA78M33-capteur-rescue
+#
+DEF remote-control-rescue_uA78M33-capteur-rescue U 0 30 N Y 1 F N
+F0 "U" 150 -196 60 H V C CNN
+F1 "remote-control-rescue_uA78M33-capteur-rescue" 0 200 60 H V C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+S -200 -150 200 150 0 1 0 N
+X VI 1 -400 50 200 R 40 40 1 1 W
+X GND 2 0 -250 100 U 40 40 1 1 W
+X VO 3 400 50 200 L 40 40 1 1 w
+ENDDRAW
+ENDDEF
+#
+#End Library
