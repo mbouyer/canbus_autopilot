@@ -48,6 +48,7 @@ class wxpilot : public wxApp
 	void setRudder(double, bool);
 	void setStatus(int, int, const wxString &);
 	void setFactors(int, int[NFACTORS]);
+	void setRadio(int, int, int);
   private:
 	PilotFrame *frame;
 };

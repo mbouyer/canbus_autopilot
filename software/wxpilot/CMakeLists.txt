@@ -116,6 +116,7 @@ SET(N2KSRCS
     N2K/nmea2000_rateofturn_rx.cpp
     N2K/private_command_status_rx.cpp
     N2K/private_command_factors.cpp
+    N2K/private_remote_control_rx.cpp
 )
 
 SET(SRCS

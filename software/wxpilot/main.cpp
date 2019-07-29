@@ -52,6 +52,7 @@ public:
 		data_nav = 0,
 		data_params,
 		data_status,
+		radio_params,
 	} dataup_t; 
 	void wake(dataup_t);
 	double boatHeading;
@@ -67,6 +68,7 @@ public:
 	wxString mode;
 	int paramslot;
 	int paramvalues[3];
+	int radio_txv, radio_state, radio_rssi;
 
 private:
 	wxConfig *config;
@@ -203,6 +205,9 @@ void PilotFrame::OnDataUpdate(wxCommandEvent & event)
 		}
 		pilotparams->setValues(paramslot, paramvalues);
 		break;
+	case PilotFrame::dataup_t::radio_params:
+		pilotstatus->radio(radio_txv, radio_state, radio_rssi);
+		break;
 	}
 }
 
@@ -302,4 +307,12 @@ void wxpilot::setFactors(int slot, int values[3])
 	for (int i = 0; i < 3; i++)
 		frame->paramvalues[i] = values[i];
 	frame->wake(PilotFrame::dataup_t::data_params);
+}
+
+void wxpilot::setRadio(int txv, int state, int rssi)
+{
+	frame->radio_txv = txv;
+	frame->radio_state = state;
+	frame->radio_rssi = rssi;
+	frame->wake(PilotFrame::dataup_t::radio_params);
 }

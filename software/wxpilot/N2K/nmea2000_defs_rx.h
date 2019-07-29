@@ -99,6 +99,15 @@ class private_command_factors_rx : public nmea2000_frame_rx {
     private:
 };
 
+class private_remote_control_rx : public nmea2000_frame_rx {
+    public:
+	inline private_remote_control_rx() :
+	    nmea2000_frame_rx("Private Remote Control", true, PRIVATE_REMOTE_CONTROL) { }
+	virtual ~private_remote_control_rx() {};
+	bool handle(const nmea2000_frame &f);
+    private:
+};
+
 class nmea2000_rx {
     public:
 	inline nmea2000_rx() {};
@@ -114,12 +123,14 @@ class nmea2000_rx {
 	nmea2000_rateofturn_rx rateofturn;
 	private_command_status_rx private_command_status;
 	private_command_factors_rx private_command_factors;
+	private_remote_control_rx private_remote_control;
 
-	std::array<nmea2000_frame_rx *,4> frames_rx = { {
+	std::array<nmea2000_frame_rx *,5> frames_rx = { {
 	    &attitude,
 	    &rateofturn,
 	    &private_command_status,
 	    &private_command_factors,
+	    &private_remote_control,
 	} };
 };
 

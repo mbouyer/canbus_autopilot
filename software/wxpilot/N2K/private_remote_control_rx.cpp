@@ -25,23 +25,51 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <wx/combobox.h>
-#define NPARAMS 6
+#include "NMEA2000.h"
+#include "nmea2000_defs_rx.h"
+#include <wxpilot.h>
 
-class pilotStatus: public wxPanel
+#define CONTROL_MOB     0x00
+#define CONTROL_MOB_MARK        0x00
+#define CONTROL_MOB_SIZE 2
+#define CONTROL_LIGHT   0x01
+#define CONTROL_LIGHT_OFF       0x00
+#define CONTROL_LIGHT_ON        0x01
+#define CONTROL_LIGHT_VAL       0x02
+#define CONTROL_LIGHT_SIZE     2
+#define CONTROL_LIGHT_VAL_SIZE 3
+#define CONTROL_RESET   0x02
+#define CONTROL_RESET_SIZE 1
+#define CONTROL_MUTE    0x02
+#define CONTROL_MUTE_SIZE 2
+#define CONTROL_BEEP    0x04
+#define CONTROL_BEEP_SHORT      0x00
+#define CONTROL_BEEP_LONG       0x01  
+#define CONTROL_BEEP_SIZE 2
+#define CONTROL_REMOTE_RADIO    0x05
+#define CONTROL_REMOTE_RADIO_SIZE 5
+
+
+bool
+private_remote_control_rx::handle(const nmea2000_frame &f)
 {
-  public:
-	pilotStatus(wxWindow *parent, wxWindowID id=wxID_ANY);
-	void address(int);
-	void group(int);
-	void status(const wxString &mode);
-	void radio(int, int, int);
-  private:
-	wxFlexGridSizer *mainsizer, *pilotsizer, *radiosizer;
-	wxStaticText *Taddr;
-	wxStaticText *Tgroup;
-	wxStaticText *Tmode;
-	wxStaticText *Rtxv;
-	wxStaticText *Rstate;
-	wxStaticText *Rrssi;
-};
+	int type, subtype;
+	
+	type = f.frame2uint8(0);
+	subtype = f.frame2uint8(1);
+	switch(type) {
+	case CONTROL_REMOTE_RADIO:
+	{
+		if (f.getlen() != CONTROL_REMOTE_RADIO_SIZE || subtype != 0)
+			return false;
+		int last_txv = f.frame2uint8(2);
+		int last_state = f.frame2uint8(3);
+		int last_rssi = f.frame2uint8(4);
+		wxp->setRadio(last_txv, last_state, last_rssi);
+		return true;
+		break;
+	}
+	default:
+		return false;
+	}
+}
