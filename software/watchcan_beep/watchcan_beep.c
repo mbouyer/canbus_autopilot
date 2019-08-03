@@ -103,7 +103,7 @@ main(int argc, const char *argv[])
 			warn("fork");
 			break;
 		case 0:
-			execlp("/usr/bin/audioplay", "audioplay", argv[type+1]);
+			execlp("/usr/bin/audioplay", "audioplay", argv[type+1], NULL);
 			err(1, "exec");
 			break;
 		default:
