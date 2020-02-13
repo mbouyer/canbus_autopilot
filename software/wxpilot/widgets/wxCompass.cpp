@@ -56,7 +56,7 @@ void wxCompass::OnPaint(wxPaintEvent& event)
 {
 	wxSize size = GetSize();
 	wxFont font(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL,
-	    wxFONTWEIGHT_NORMAL, false, wxT("Courier 10 Pitch"));
+	    wxFONTWEIGHT_NORMAL, false, wxT("Sans"));
 	wxPaintDC dc(this);
 	dc.SetFont(font);
 	int pxPerMark = dc.GetTextExtent("8888").GetWidth() / 2;
