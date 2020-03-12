@@ -238,6 +238,7 @@ struct private_remote_control {
 #define CONTROL_LIGHT_OFF	0x00
 #define CONTROL_LIGHT_ON	0x01
 #define CONTROL_LIGHT_VAL	0x02
+#define CONTROL_LIGHT_REV	0x03
 #define CONTROL_LIGHT_SIZE     2
 #define CONTROL_LIGHT_VAL_SIZE 3
 #define CONTROL_RESET	0x02
