@@ -1,9 +1,9 @@
 $fn = 100;
-// ABS: 1mm de retrait
+// ABS: environ 1mm de retrait
 // longueur_b = 4.10 * 25.4;
-longueur_b = 113.8 + 1;
+longueur_b = 113.8 + 0.9;
 // largeur_b = 2.60 * 25.4;
-largeur_b = 83.5 + 1;
+largeur_b = 83.5 + 0.9;
 hauteur_b = 60;
 hauteur_b_droite = 7;
 angle=4.9;
@@ -70,7 +70,7 @@ module base(longueur, largeur, hauteur, r) {
 	
 
 module box() {
-	difference() {
+	rotate([180,0,0]) difference() {
 		base(longueur_b+murs_ep*2, largeur_b+murs_ep*2, hauteur_b+base_ep, 0);
 		base(longueur_b, largeur_b, hauteur_b, 4);
 		translate([longueur_b/2, -largeur_b/2+hole_x, hole_z]) hole();
@@ -78,6 +78,11 @@ module box() {
 }
 
 box();
+
+// difference() {
+//  	box();
+//  	translate([0,0,-hauteur_b / 2 - 20]) cube([longueur_b+10, largeur_b+10, hauteur_b], center=true);
+// };
 // hole();
 
 // projection(cut=true) translate([0,0, -0.1]) box();
