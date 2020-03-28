@@ -207,6 +207,7 @@ static void get_rotary_pos(void)
 
 unsigned char backlight_pr;
 #define BACKLIGHT_ADDR 0x00 /* address of backlight_pr save in eeprom */
+unsigned char backlight_status;
 static unsigned char lcd_col;
 static unsigned char lcd_line;
 #define DISPLAY_W	132
@@ -1422,6 +1423,7 @@ page_light(char pagechange) __wparam
 	if (switch_events.s.sw4) {
 		eeprom_write(BACKLIGHT_ADDR, backlight_pr);
 		next_display_page = page_previous_display_page;
+		do_light();
 	}
 }
 
@@ -1976,18 +1978,52 @@ sw_beep()
 }
 
 static void
+do_light(void)
+{
+	switch(backlight_status) {
+	case CONTROL_LIGHT_ON:
+		/* light on */
+		A0 = A0_CTRL;
+		spi_write(0xA6);
+		A0 = A0_DISP;
+		CCPR2L = backlight_pr;
+		break;
+	case CONTROL_LIGHT_REV:
+		/* light on, inv */
+		A0 = A0_CTRL;
+		spi_write(0xA7);
+		A0 = A0_DISP;
+		CCPR2L = backlight_pr;
+		break;
+	default:
+		/* light off */
+		A0 = A0_CTRL;
+		spi_write(0xA6);
+		A0 = A0_DISP;
+		CCPR2L = 0;
+		break;
+	}
+}
+
+static void
 check_light()
 {
 	if (switch_events.s.sw1) {
-		if (CCPR2L == 0) {
-			/* light on */
-			CCPR2L = backlight_pr;
+		switch(backlight_status) {
+		case CONTROL_LIGHT_OFF:
 			send_command_light(CONTROL_LIGHT_ON, 0);
-		} else {
-			/* light off */
-			CCPR2L = 0;
+			backlight_status = CONTROL_LIGHT_ON;
+			break;
+		case CONTROL_LIGHT_ON:
+			send_command_light(CONTROL_LIGHT_REV, 0);
+			backlight_status = CONTROL_LIGHT_REV;
+			break;
+		default:
 			send_command_light(CONTROL_LIGHT_OFF, 0);
+			backlight_status = CONTROL_LIGHT_OFF;
+			break;
 		}
+		do_light();
 	}
 	if (switch_events.s.sw1l) {
 		next_display_page = LIGHT;
@@ -2138,7 +2174,8 @@ main(void) __naked
 		; // wait
 	T4CONbits.TMR4ON = 0;
 	SPKR_PORT = 0;
-	CCPR2L = backlight_pr; /* backlight on */
+	backlight_status = CONTROL_LIGHT_ON;
+	do_light();
 
 	previous_display_page = next_display_page = display_page = MAIN_DATA;
 	new_page = 1;
