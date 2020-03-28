@@ -17,7 +17,7 @@ obj:
 	mkdir obj
 
 display.bin: display.hex
-	hex2bin ${.ALLSRC} ${.TARGET}
+	hex2bin1k ${.ALLSRC} ${.TARGET}
 	@ls -lh ${.TARGET}
 
 display.hex: ${OBJECTS}
