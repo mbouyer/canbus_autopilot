@@ -247,6 +247,7 @@ static union displar_errs {
 } err_list, err_ack;
 
 static void sw_beep(void);
+static void do_light(void);
 static void check_light(void);
 static unsigned char check_light_long;
 
@@ -578,7 +579,10 @@ resetdisplay(void)
 
 	spi_write(0xC0); /* Normal com0-com3 */
 
-	spi_write(0xA6); /* Display normal */
+	if (backlight_status == CONTROL_LIGHT_REV) 
+		spi_write(0xA7); /* Display reverse */
+	else
+		spi_write(0xA6); /* Display normal */
 
 	spi_write(0xA2); /* Bias 1/9 */
 
@@ -591,7 +595,7 @@ resetdisplay(void)
 
 	spi_write(0x23); /* contrast */
 	spi_write(0x81);
-	spi_write(0x14);
+	spi_write(0x20);
 
 	spi_write(0xac); /* static indicator */
 	spi_write(0x00);
