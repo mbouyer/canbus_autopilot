@@ -982,13 +982,15 @@ page_maindata(char pagechange) __wparam
 	}
 	if (previous_auto_mode != received_auto_mode) {
 		switch (received_auto_mode) {
-		case AUTO_OFF:
-			break;
 		case AUTO_STANDBY:
+			sw_beep();
 			next_display_page = ACT_PAGE;
 			break;
-		default:
+		case AUTO_HEAD:
+			sw_beep();
 			next_display_page = ENGAGED_DATA;
+			break;
+		default:
 			break;
 		}
 		previous_auto_mode = received_auto_mode;
@@ -1015,6 +1017,7 @@ page_engageddata(char pagechange) __wparam
 {
 	static int heading;
 	static int previous_target_heading;
+	static unsigned char previous_auto_mode;
 
 	if (pagechange) {
 		sprintf(lcd_displaybuf, "STOP");
@@ -1032,12 +1035,22 @@ page_engageddata(char pagechange) __wparam
 		displaybuf_small();
 		heading = previous_target_heading = HEADING_INVALID;
 		rotary_pos = 0;
+		previous_auto_mode = received_auto_mode;
 	}
-	if (received_auto_mode == AUTO_OFF) {
-		send_command_engage(AUTO_OFF, received_param_slot);
-		sw_beep();
-		next_display_page = MAIN_DATA;
-		return;
+	if (previous_auto_mode != received_auto_mode) {
+		switch (received_auto_mode) {
+		case AUTO_OFF:
+			sw_beep();
+			next_display_page = MAIN_DATA;
+			break;
+		case AUTO_STANDBY:
+			sw_beep();
+			next_display_page = ACT_PAGE;
+			break;
+		default:
+			break;
+		}
+		previous_auto_mode = received_auto_mode;
 	}
 	if (received_auto_mode == AUTO_HEAD) {
 		command_target_heading = command_received_heading;
@@ -1108,6 +1121,8 @@ static void
 page_act(char pagechange) __wparam
 {
 	static unsigned short last_xmit;
+	static unsigned char previous_auto_mode;
+
 	if (pagechange) {
 		sprintf(lcd_displaybuf, "GO");
 		lcd_line = 0;
@@ -1124,10 +1139,31 @@ page_act(char pagechange) __wparam
 		displaybuf_medium();
 		rotary_pos = 0;
 		last_xmit = timer0_read();
+		previous_auto_mode = received_auto_mode;
 	}
 	check_light();
 	if (softintrs & INT_SW_R) {
 		softintrs &= ~INT_SW_R;
+	}
+	if (previous_auto_mode != received_auto_mode) {
+		switch (received_auto_mode) {
+		case AUTO_OFF:
+			sw_beep();
+			next_display_page = MAIN_DATA;
+			break;
+		case AUTO_STANDBY:
+			break;
+
+		case AUTO_HEAD:
+			sw_beep();
+			next_display_page = ENGAGED_DATA;
+			break;
+		default:
+			sw_beep();
+			printf("unknown mode %d\n", received_auto_mode);
+			break;
+		}
+		previous_auto_mode = received_auto_mode;
 	}
 	if ((timer0_read() - last_xmit) > 1000 && rotary_pos != 0) {
 		__data struct private_command_acuator *d = (void *)&nmea2000_data[0];
