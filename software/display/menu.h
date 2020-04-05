@@ -46,6 +46,7 @@ enum display_page {
 	CONF_CMD_CONFIG,
 	PAGE_ERR,
 	PAGE_CMDERR,
+	EDISPLAY_CMD,
 	NOP,
 	BACK,
 };

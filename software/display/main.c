@@ -238,6 +238,8 @@ static void page_rawdata_capt(char) __wparam;
 static void page_rawdata_cmd(char) __wparam;
 static void page_err(char) __wparam;
 static void page_cmderr(char) __wparam;
+static void page_edisplay(char) __wparam;
+
 static union displar_errs {
     struct {
 	char nocapt	: 1;
@@ -260,6 +262,22 @@ next_page_from_auto_mode(void)
 		return ACT_PAGE;
 	else
 		return ENGAGED_DATA;
+}
+
+static void
+send_edisplay_page(char move)
+{
+	__data struct private_remote_control * d = (void *)&nmea2000_data[0];
+	d->control_type = CONTROL_REMOTE_DISPLAY;
+	d->control_subtype = CONTROL_REMOTE_DISPLAY_PAGE;
+	d->control_data[0] = move;
+	msg.id.id = 0;
+	msg.id.iso_pg = (PRIVATE_REMOTE_CONTROL >> 8) & 0xff;
+	msg.id.daddr = NMEA2000_ADDR_GLOBAL;
+	msg.id.priority = NMEA2000_PRIORITY_INFO;
+	msg.data = &nmea2000_data[0];
+	if (! nmea2000_send_single_frame(&msg))
+		printf("send PRIVATE_REMOTE_CONTROL failed\n");
 }
 
 static void
@@ -1020,6 +1038,9 @@ page_maindata(char pagechange) __wparam
 	if (switch_events.s.sw4) {
 		next_display_page = MAIN_MENU;
 	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
+	}
 	if (switch_events.s.sw2) {
 		switch_to_standby();
 	}
@@ -1119,6 +1140,9 @@ page_engageddata(char pagechange) __wparam
 	if (switch_events.s.sw4) {
 		next_display_page = MAIN_MENU;
 	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
+	}
 	if (switch_events.s.sw3l) {
 		next_display_page = CONF_CMD_CONFIG;
 	}
@@ -1192,6 +1216,9 @@ page_act(char pagechange) __wparam
 			printf("send PRIVATE_COMMAND_ACUATOR failed\n");
 		last_xmit = timer0_read();
 	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
+	}
 	if (switch_events.s.sw3) {
 		send_command_engage(AUTO_OFF, received_param_slot);
 		next_display_page = MAIN_DATA;
@@ -1233,6 +1260,9 @@ page_cogsog(char pagechange) __wparam
 	}
 	if (switch_events.s.sw4) {
 		next_display_page = MAIN_MENU;
+	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
 	}
 	if (switch_events.s.sw2) {
 		switch_to_standby();
@@ -1335,6 +1365,9 @@ page_towp(char pagechange) __wparam
 	if (switch_events.s.sw4) {
 		next_display_page = MAIN_MENU;
 	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
+	}
 	if (switch_events.s.sw2) {
 		switch_to_standby();
 	}
@@ -1371,6 +1404,9 @@ page_time(char pagechange) __wparam
 	}
 	if (switch_events.s.sw4) {
 		next_display_page = MAIN_MENU;
+	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
 	}
 	if (switch_events.s.sw2) {
 		switch_to_standby();
@@ -1508,6 +1544,9 @@ page_rawdata_capt(char pagechange) __wparam
 	if (switch_events.s.sw4) {
 		next_display_page = next_page_from_auto_mode();
 	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
+	}
 }
 
 static void
@@ -1538,6 +1577,9 @@ page_rawdata_cmd(char pagechange) __wparam
 	}
 	if (switch_events.s.sw4) {
 		next_display_page = next_page_from_auto_mode();
+	}
+	if (switch_events.s.sw4l) {
+		next_display_page = EDISPLAY_CMD;
 	}
 }
 
@@ -1991,6 +2033,49 @@ page_cmderr(char pagechange) __wparam
 
 	if (switch_events.s.sw4) {
 		send_command_errack(toack.byte);
+	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
+	}
+}
+
+static void
+page_edisplay(char pagechange) __wparam
+{
+	static enum display_page page_previous_display_page;
+
+	if (pagechange) {
+		page_previous_display_page = previous_display_page;
+	}
+	if (pagechange ||
+	     timer0_read() - last_display_update > 5000) {
+#define MSGLEN 8
+		clearline(1);
+		lcd_col = DISPLAY_W / 2 - (MSGLEN / 2) * DISPLAY_FONTMEDIUM_W - 1;
+		lcd_line = 1;
+		sprintf(lcd_displaybuf, "%s", "edisplay");
+		displaybuf_medium();
+
+		sprintf(lcd_displaybuf, "ACK");
+		lcd_line = 3;
+		lcd_col = 0;
+		displaybuf_small();
+#undef MSGLEN
+	}
+
+	if (softintrs & INT_SW_R) {
+		get_rotary_pos();
+		if (saved_rotary_pos < 0) {
+			send_edisplay_page(-1);
+			sw_beep();
+		}
+		if (saved_rotary_pos > 0) {
+			send_edisplay_page(1);
+			sw_beep();
+		}
+	}
+	if (switch_events.s.sw4 || switch_events.s.sw3) {
+		next_display_page = page_previous_display_page;
 	}
 	if (switch_events.s.sw2) {
 		switch_to_standby_from_head();
@@ -2456,6 +2541,9 @@ again:
 			break;
 		case CONF_CMD_CONFIG:
 			page_conf_cmd_config(new_page);
+			break;
+		case EDISPLAY_CMD:
+			page_edisplay(new_page);
 			break;
 		default:
 			printf("unknown menu %d\n", display_page);
