@@ -288,6 +288,14 @@ switch_to_standby(void)
 }
 
 static void
+switch_to_standby_from_head(void)
+{
+	if (received_auto_mode == AUTO_HEAD) {
+		switch_to_standby();
+	}
+}
+
+static void
 send_command_request_factors(char slot) __wparam
 {
 	__data struct private_command_factors_request *d = (void *)&nmea2000_data[0];
@@ -1429,6 +1437,9 @@ page_light(char pagechange) __wparam
 		next_display_page = page_previous_display_page;
 		do_light();
 	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
+	}
 }
 
 static void
@@ -1455,6 +1466,9 @@ page_charlist(char pagechange) __wparam
 		lcd_line = 1;
 		lcd_col = DISPLAY_W / 2 - 1;
 		displaybuf_small();
+	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
 	}
 	if (switch_events.s.sw4) {
 		next_display_page = next_page_from_auto_mode();
@@ -1488,6 +1502,9 @@ page_rawdata_capt(char pagechange) __wparam
 		lcd_col = 0;
 		displaybuf_small();
 	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
+	}
 	if (switch_events.s.sw4) {
 		next_display_page = next_page_from_auto_mode();
 	}
@@ -1515,6 +1532,9 @@ page_rawdata_cmd(char pagechange) __wparam
 		lcd_line = 3;
 		lcd_col = 0;
 		displaybuf_small();
+	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
 	}
 	if (switch_events.s.sw4) {
 		next_display_page = next_page_from_auto_mode();
@@ -1789,6 +1809,9 @@ page_conf_cmd_factors(char pagechange) __wparam
 			next_display_page = next_page_from_auto_mode();
 		}
 	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
+	}
 }
 
 static void
@@ -1833,6 +1856,9 @@ page_conf_cmd_config(char pagechange) __wparam
 	}
 	if (switch_events.s.sw3) {
 		next_display_page = next_page_from_auto_mode();
+	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
 	}
 }
 
@@ -1892,6 +1918,9 @@ page_err(char pagechange) __wparam
 	if (switch_events.s.sw4) {
 		err_ack.byte |= toack.byte;
 		err_list.byte &= ~toack.byte;
+	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
 	}
 }
 
@@ -1962,6 +1991,9 @@ page_cmderr(char pagechange) __wparam
 
 	if (switch_events.s.sw4) {
 		send_command_errack(toack.byte);
+	}
+	if (switch_events.s.sw2) {
+		switch_to_standby_from_head();
 	}
 }
 
