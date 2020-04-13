@@ -275,6 +275,7 @@ send_edisplay_page(char move)
 	msg.id.iso_pg = (PRIVATE_REMOTE_CONTROL >> 8) & 0xff;
 	msg.id.daddr = NMEA2000_ADDR_GLOBAL;
 	msg.id.priority = NMEA2000_PRIORITY_INFO;
+	msg.dlc = CONTROL_REMOTE_DISPLAY_PAGE_SIZE;
 	msg.data = &nmea2000_data[0];
 	if (! nmea2000_send_single_frame(&msg))
 		printf("send PRIVATE_REMOTE_CONTROL failed\n");
