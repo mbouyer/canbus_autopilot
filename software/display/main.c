@@ -120,9 +120,12 @@ unsigned short last_nmea2000_xte;
 
 static unsigned int received_towp_cog; /* also use HEADING_INVALID */
 static unsigned long received_towp_dist; /* in m  * 100 */
+static unsigned long received_towp_idx; /* dest. waypoint index */
 static          char received_towp_speed;
 static unsigned char received_towp_speedd;
 static unsigned char towp_changed;
+static unsigned long previous_towp_idx;
+static unsigned char new_wp;
 unsigned short last_nmea2000_navdata;
 
 unsigned char nmea2000_capteur_address;
@@ -488,6 +491,13 @@ user_receive()
 		if (nmea2000_navdata_len == 0) {
 			long speed;
 			/* packet complete */
+			received_towp_idx = 
+			    nmea2000_navdata_data.s.d_wp_n;
+			if (received_towp_cog == HEADING_INVALID ||
+			    previous_towp_idx != received_towp_idx) {
+				previous_towp_idx = received_towp_idx;
+				new_wp = 1;
+			}
 			received_towp_cog =
 			    nmea2000_navdata_data.s.bearing_p2d;
 			received_towp_dist = 
@@ -2100,6 +2110,14 @@ sw_beep()
 }
 
 static void
+sw_beep_long()
+{
+	PR4 = SPKR_1000;
+	T4CONbits.TMR4ON = 1;
+	beep_duration = SPKR_1000_D100; /* 0.1s */
+}
+
+static void
 do_light(void)
 {
 	switch(backlight_status) {
@@ -2178,6 +2196,7 @@ main(void) __naked
 
 	received_heading = received_cog = received_towp_cog = HEADING_INVALID;
 	received_xte = XTE_INVALID;
+	new_wp = 0;
 
 	nmea2000_navdata_len = 0xff;
 
@@ -2483,6 +2502,12 @@ again:
 			switch_events.s.sw2l = 0;
 			send_command_mob();
 			next_display_page = TOWP_DATA;
+		}
+
+		if (new_wp) {
+			sw_beep_long();
+			next_display_page = TOWP_DATA;
+			new_wp = 0;
 		}
 
 		switch(display_page) {
