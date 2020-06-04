@@ -114,6 +114,11 @@ unsigned char motor_overcurrent_count;
 #define RUDDER_MIN (3072 >> 4)
 #define RUDDER_MAX (29736 >> 4)
 
+#define RUDDER_MIN_TOL ((RUDDER_MIN) + (RUDDER_MAX - RUDDER_MIN) / 10)
+#define RUDDER_MAX_TOL ((RUDDER_MAX) - (RUDDER_MAX - RUDDER_MIN) / 10)
+static int rudder_min;
+static int rudder_max;
+
 /*
  * rudder PID parameters. half move (13330 / 16) = 833 in about 4s,
  * sample every 0.1s
@@ -320,6 +325,8 @@ user_receive()
 				rudder_cons = previous_rudder =
 				    a2d_rudder;
 				target_rudder = rudder_cons;
+				rudder_min = RUDDER_MIN;
+				rudder_max = RUDDER_MAX;
 				/* init PID */
 				previous_rot_rate = received_rot_rate;
 				/* power on but idle */
@@ -562,17 +569,11 @@ compute_rudder_cons(void)
 	    (float)((RUDDER_MAX - RUDDER_MIN)));
 
 	target_rudder += rudder_correct;
-	if (target_rudder < RUDDER_MIN)
-		target_rudder = RUDDER_MIN;
-	else if (target_rudder > RUDDER_MAX)
-		target_rudder = RUDDER_MAX;
+	if (target_rudder < rudder_min)
+		target_rudder = rudder_min;
+	else if (target_rudder > rudder_max)
+		target_rudder = rudder_max;
 	new_rudder_int = target_rudder;
-#if 0
-	if (new_rudder_int < RUDDER_MIN + (RUDDER_MAX - RUDDER_MIN) / 3)
-		new_rudder_int = RUDDER_MIN + (RUDDER_MAX - RUDDER_MIN) / 3;
-	else if (new_rudder_int > RUDDER_MAX - (RUDDER_MAX - RUDDER_MIN) / 3)
-		new_rudder_int = RUDDER_MAX - (RUDDER_MAX - RUDDER_MIN) / 3;
-#endif
 
 	/* try to avoid unneeded small moves */
 	if (new_rudder_int - rudder_cons > 0 || 
@@ -810,7 +811,12 @@ again:
 					printf("E %d", a2d_motorcurrent);
 					EN_ALL = 0;
 					acuator_temp_off = 10;
-					if (!err_list.bits.output_overload &&
+					if (a2d_rudder > RUDDER_MAX_TOL) {
+						rudder_max = a2d_rudder;
+					} else if (a2d_rudder < RUDDER_MIN_TOL){
+						rudder_min = a2d_rudder;
+					} else if (
+					    !err_list.bits.output_overload &&
 					    !err_ack.bits.output_overload) {
 						err_list.bits.output_overload = 1;
 					}
