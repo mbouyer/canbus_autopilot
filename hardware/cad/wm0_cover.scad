@@ -71,7 +71,7 @@ module base(longueur, largeur, hauteur, r) {
 
 module box() {
 	rotate([180,0,0]) difference() {
-		base(longueur_b+murs_ep*2, largeur_b+murs_ep*2, hauteur_b+base_ep, 0);
+		translate([0,0,base_ep]) base(longueur_b+murs_ep*2, largeur_b+murs_ep*2, hauteur_b+base_ep, 0);
 		base(longueur_b, largeur_b, hauteur_b, 4);
 		translate([longueur_b/2, -largeur_b/2+hole_x, hole_z]) hole();
 	};
