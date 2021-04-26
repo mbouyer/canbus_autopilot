@@ -168,7 +168,7 @@ get_eeprom_datas(void)
 		compass_correction_table[i] =
 		    get_eeprom_short(COMPASS_CORRECTION_TABLE_OFFSET + i * 2);
 	}
-#ifdef CAPTEUR_FAKE
+#ifdef FAKE
 	w_bx = 0;
 	w_by = 0;
 	w_bz = 0;
@@ -403,7 +403,7 @@ main(void) __naked
 	/* enable watch dog timer */  
 	WDTCON = 0x01;
 
-#ifndef CAPTEUR_FAKE
+#ifndef FAKE
 	for (i = 0; i < 5; i++) {
 		short wait;
 		c = 0;
@@ -668,7 +668,7 @@ compute_values(void)
 void
 get_data_am(void)
 {
-#ifdef CAPTEUR_FAKE
+#ifdef FAKE
 	accel_int_count = 1;
 	accel_data_integrate.accel_x = 100L;
 	accel_data_integrate.accel_y = -200L;
@@ -712,7 +712,7 @@ get_data_am(void)
 void
 get_data_w(void)
 {
-#ifdef CAPTEUR_FAKE
+#ifdef FAKE
 	gyro_data_integrate.gyro_x = 0L;
 	gyro_data_integrate.gyro_y = 0L;
 	gyro_data_integrate.gyro_z = 0L;

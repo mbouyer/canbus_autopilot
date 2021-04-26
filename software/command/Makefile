@@ -4,7 +4,7 @@
 
 CC= sdcc  --use-non-free --Werror --fsigned-char
 CFLAGS= -I${.CURDIR} -I${.CURDIR}/../../../pic18_n2k -I${.CURDIR}/../lib/eeprom
-CFLAGS+= -DFAKE
+#CFLAGS+= -DFAKE
 OBJECTS= main.o serial.o nmea2000.o raddeg.o eeprom.o
 HEADERS= autopilot_serial.h raddeg.h eeprom.h nmea2000.h nmea2000_pgn.h nmea2000_user.h
 

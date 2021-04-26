@@ -6,7 +6,6 @@ CC= sdcc  --use-non-free --Werror --fsigned-char
 ASM = gpasm
 CFLAGS= -I${.CURDIR} -I${.CURDIR}/../../../pic18_n2k -I${.CURDIR}/../lib/eeprom
 CFLAGS+= --fomit-frame-pointer --denable-peeps --optimize-cmp --optimize-df
-CFLAGS+= -DCAPTEUR_FAKE
 OBJECTS= main.o serial.o nmea2000.o raddeg.o
 HEADERS= autopilot_serial.h nmea2000.h nmea2000_pgn.h nmea2000_user.h raddeg.h
 
