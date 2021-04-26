@@ -42,7 +42,7 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 #endif
-#include "../lib/nmea2000/nmea2000_pgn.h"
+#include <nmea2000_pgn.h>
 
 int s;
 
