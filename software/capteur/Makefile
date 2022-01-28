@@ -11,7 +11,7 @@ OBJECTS= main.o marg_filter.o serial.o autopilot_i2c.o nmea2000.o eeprom.o
 OBJECTS+= fsmul.o fsadd.o fssub.o mullong.o
 HEADERS= marg_filter.h autopilot_serial.h autopilot_i2c.h l3dg20reg.h lsm303.h nmea2000.h nmea2000_pgn.h nmea2000_user.h eeprom.h
 
-all: capteur.bin
+all: capteur.hex
 
 obj:
 	mkdir obj
