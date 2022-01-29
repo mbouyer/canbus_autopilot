@@ -2300,7 +2300,7 @@ main(void) __naked
 	lcd_line = 0;
 	printf("ready");
 	poll_count = timer0_read();
-	while (nmea2000_addr_status != ADDR_STATUS_OK) {
+	while (nmea2000_status != NMEA2000_S_OK) {
 		nmea2000_poll(5);
 		while ((timer0_read() - poll_count) < 48)
 			; // wait 5ms
@@ -2393,7 +2393,7 @@ again:
 		if (PIR5bits.RXBnIF)
 			nmea2000_receive();
 
-		if (nmea2000_addr_status == ADDR_STATUS_CLAIMING) {
+		if (nmea2000_status == NMEA2000_S_CLAIMING) {
 			if ((timer0_read() - poll_count) > 48) {
 				nmea2000_poll(5);
 				poll_count = timer0_read();

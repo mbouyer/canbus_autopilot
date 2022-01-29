@@ -465,7 +465,7 @@ main(void) __naked
 
 	printf("\nready");
 	poll_count = timer0_read();
-	while (nmea2000_addr_status != ADDR_STATUS_OK) {
+	while (nmea2000_status != NMEA2000_S_OK) {
 		nmea2000_poll(5);
 		while ((timer0_read() - poll_count) < TIMER0_5MS) {
 			nmea2000_receive();
@@ -499,12 +499,12 @@ again:
 		if (PIR5bits.RXBnIF)
 			nmea2000_receive();
 
-		if (nmea2000_addr_status == ADDR_STATUS_CLAIMING) {
+		if (nmea2000_status == NMEA2000_S_CLAIMING) {
 			if ((timer0_read() - poll_count) > TIMER0_5MS) {
 				nmea2000_poll(5);
 				poll_count = timer0_read();
 			}
-			if (nmea2000_addr_status == ADDR_STATUS_OK) {
+			if (nmea2000_status == NMEA2000_S_OK) {
 				printf("new addr %d\n", nmea2000_addr);
 			}
 		};
@@ -548,7 +548,7 @@ again:
 				}
 				if (counter_1hz == 0) {
 					counter_1hz = 10;
-					if (nmea2000_addr_status == ADDR_STATUS_OK) {
+					if (nmea2000_status == NMEA2000_S_OK) {
 #if 0
 						printf("%02x gyro %10ld "
 						    "pitch %6d roll %6d "
@@ -593,7 +593,7 @@ again:
 		if (RCREG2 == 'r')
 			break;
 
-		if (nmea2000_addr_status == ADDR_STATUS_OK) {
+		if (nmea2000_status == NMEA2000_S_OK) {
 			__asm
 			SLEEP
 			__endasm;
