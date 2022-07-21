@@ -104,11 +104,13 @@ static unsigned char beep_duration;
 
 static union command_errors err_list, err_ack;
 
-int a2d_motorcurrent; /* AN2 */
+unsigned int a2d_motorcurrent; /* AN2 */
 int a2d_rudder; /* AN9 */
 int a2d_acc;
 unsigned char a2d_idx;
 unsigned char motor_overcurrent_count;
+#define MOTORCURRENT_MAX 12000 // autohelm
+// #define MOTORCURRENT_MAX 36000U // st2000+
 #define MOTOR_OVERCURRENT_MAX 3 /* 0.3s */
 
 #define RUDDER_MIN (3072 >> 4)
@@ -804,7 +806,7 @@ again:
 					err_ack.bits.output_overload = 0;
 				}
 			}
-			if (a2d_motorcurrent > 12000) {
+			if (a2d_motorcurrent > MOTORCURRENT_MAX) {
 				motor_overcurrent_count++;
 				if (motor_overcurrent_count >=
 				    MOTOR_OVERCURRENT_MAX) {
