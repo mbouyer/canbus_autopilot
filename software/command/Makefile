@@ -1,12 +1,10 @@
 .SUFFIXES: .o .hex
 
-.PATH: ${.CURDIR}/../lib/nmea2000 ${.CURDIR}/../lib/eeprom
-.PATH: ${.CURDIR}/../lib/radanddeg
+.PATH: ${.CURDIR}/../../../pic18_n2k ${.CURDIR}/../lib/eeprom
 
 CC= sdcc  --use-non-free --Werror --fsigned-char
-CFLAGS= -I${.CURDIR} -I${.CURDIR}/../lib/nmea2000 -I${.CURDIR}/../lib/eeprom
-CFLAGS+= -I${.CURDIR} -I${.CURDIR}/../lib/radanddeg
-CFLAGS+= -DFAKE
+CFLAGS= -I${.CURDIR} -I${.CURDIR}/../../../pic18_n2k -I${.CURDIR}/../lib/eeprom
+#CFLAGS+= -DFAKE
 OBJECTS= main.o serial.o nmea2000.o raddeg.o eeprom.o
 HEADERS= autopilot_serial.h raddeg.h eeprom.h nmea2000.h nmea2000_pgn.h nmea2000_user.h
 

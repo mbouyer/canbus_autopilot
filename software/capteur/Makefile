@@ -1,17 +1,17 @@
 .SUFFIXES: .o .hex
 
-.PATH: ${.CURDIR}/../lib/nmea2000 ${.CURDIR}/../lib/eeprom
+.PATH: ${.CURDIR}/../../../pic18_n2k ${.CURDIR}/../lib/eeprom
 
 CC= sdcc  --use-non-free --Werror --fsigned-char
 ASM = gpasm
-CFLAGS= -I${.CURDIR} -I${.CURDIR}/../lib/nmea2000 -I${.CURDIR}/../lib/eeprom
+CFLAGS= -I${.CURDIR} -I${.CURDIR}/../../../pic18_n2k -I${.CURDIR}/../lib/eeprom
 CFLAGS+= --fomit-frame-pointer --denable-peeps --optimize-cmp --optimize-df
-CFLAGS+= -DCAPTEUR_FAKE
+#CFLAGS+= -DFAKE
 OBJECTS= main.o marg_filter.o serial.o autopilot_i2c.o nmea2000.o eeprom.o
 OBJECTS+= fsmul.o fsadd.o fssub.o mullong.o
 HEADERS= marg_filter.h autopilot_serial.h autopilot_i2c.h l3dg20reg.h lsm303.h nmea2000.h nmea2000_pgn.h nmea2000_user.h eeprom.h
 
-all: capteur.bin
+all: capteur.hex
 
 obj:
 	mkdir obj
