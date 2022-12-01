@@ -1,36 +1,5 @@
-EESchema Schematic File Version 2
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:special
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:clk-command-cache
-EELAYER 27 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -45,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L 74HC14 U1
+L clk-command-rescue:74HC14 U1
 U 2 1 532172E9
 P 4800 2550
 F 0 "U1" H 4950 2650 40  0000 C CNN
@@ -56,7 +25,7 @@ F 3 "~" H 4800 2550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 74HC14 U1
+L clk-command-rescue:74HC14 U1
 U 3 1 532172F8
 P 6050 2550
 F 0 "U1" H 6200 2650 40  0000 C CNN
@@ -67,7 +36,7 @@ F 3 "~" H 6050 2550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 74HC14 U1
+L clk-command-rescue:74HC14 U1
 U 1 1 53217307
 P 4850 3600
 F 0 "U1" H 5000 3700 40  0000 C CNN
@@ -78,7 +47,7 @@ F 3 "~" H 4850 3600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 74HC14 U1
+L clk-command-rescue:74HC14 U1
 U 4 1 53217316
 P 4850 4150
 F 0 "U1" H 5000 4250 40  0000 C CNN
@@ -89,7 +58,7 @@ F 3 "~" H 4850 4150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 74HC14 U1
+L clk-command-rescue:74HC14 U1
 U 5 1 53217325
 P 4850 4700
 F 0 "U1" H 5000 4800 40  0000 C CNN
@@ -100,7 +69,7 @@ F 3 "~" H 4850 4700 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 74HC14 U1
+L clk-command-rescue:74HC14 U1
 U 6 1 53217334
 P 4850 5150
 F 0 "U1" H 5000 5250 40  0000 C CNN
@@ -111,7 +80,7 @@ F 3 "~" H 4850 5150 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R1
+L clk-command-rescue:R R1
 U 1 1 532173C4
 P 4800 2850
 F 0 "R1" V 4880 2850 40  0000 C CNN
@@ -122,7 +91,7 @@ F 3 "~" H 4800 2850 30  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C C2
+L clk-command-rescue:C C2
 U 1 1 532173E4
 P 5250 1600
 F 0 "C2" H 5250 1700 40  0000 L CNN
@@ -133,7 +102,7 @@ F 3 "~" H 5250 1600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C1
+L clk-command-rescue:C C1
 U 1 1 532173F1
 P 4350 1600
 F 0 "C1" H 4350 1700 40  0000 L CNN
@@ -144,7 +113,7 @@ F 3 "~" H 4350 1600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR01
+L clk-command-rescue:GND #PWR01
 U 1 1 532173F9
 P 5250 1150
 F 0 "#PWR01" H 5250 1150 30  0001 C CNN
@@ -155,7 +124,7 @@ F 3 "" H 5250 1150 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L GND #PWR02
+L clk-command-rescue:GND #PWR02
 U 1 1 53217408
 P 4350 1150
 F 0 "#PWR02" H 4350 1150 30  0001 C CNN
@@ -166,7 +135,7 @@ F 3 "" H 4350 1150 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L CONN_1 P1
+L clk-command-rescue:CONN_1 P1
 U 1 1 53217453
 P 6400 900
 F 0 "P1" H 6480 900 40  0000 L CNN
@@ -177,7 +146,7 @@ F 3 "" H 6400 900 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_1 P4
+L clk-command-rescue:CONN_1 P4
 U 1 1 53217466
 P 6800 2550
 F 0 "P4" H 6880 2550 40  0000 L CNN
@@ -188,7 +157,7 @@ F 3 "" H 6800 2550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR03
+L clk-command-rescue:GND #PWR03
 U 1 1 53217483
 P 5750 900
 F 0 "#PWR03" H 5750 900 30  0001 C CNN
@@ -199,7 +168,7 @@ F 3 "" H 5750 900 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L VCC #PWR04
+L clk-command-rescue:VCC #PWR04
 U 1 1 5321748B
 P 5800 1500
 F 0 "#PWR04" H 5800 1600 30  0001 C CNN
@@ -212,7 +181,7 @@ $EndComp
 Text Label 6550 2550 0    60   ~ 0
 CLK
 $Comp
-L CRYSTAL X1
+L clk-command-rescue:CRYSTAL X1
 U 1 1 532174B3
 P 4800 1850
 F 0 "X1" H 4800 2000 60  0000 C CNN
@@ -223,7 +192,7 @@ F 3 "~" H 4800 1850 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR05
+L clk-command-rescue:GND #PWR05
 U 1 1 53217722
 P 6000 2800
 F 0 "#PWR05" H 6000 2800 30  0001 C CNN
@@ -234,7 +203,7 @@ F 3 "" H 6000 2800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L VCC #PWR06
+L clk-command-rescue:VCC #PWR06
 U 1 1 5321773A
 P 6000 2300
 F 0 "#PWR06" H 6000 2400 30  0001 C CNN
@@ -249,7 +218,7 @@ NoConn ~ 5300 4150
 NoConn ~ 5300 4700
 NoConn ~ 5300 5150
 $Comp
-L PWR_FLAG #FLG07
+L clk-command-rescue:PWR_FLAG #FLG07
 U 1 1 53217776
 P 6250 800
 F 0 "#FLG07" H 6250 895 30  0001 C CNN
@@ -260,7 +229,7 @@ F 3 "" H 6250 800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L PWR_FLAG #FLG08
+L clk-command-rescue:PWR_FLAG #FLG08
 U 1 1 53217785
 P 6250 1400
 F 0 "#FLG08" H 6250 1495 30  0001 C CNN
@@ -271,7 +240,7 @@ F 3 "" H 6250 1400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_1 P3
+L clk-command-rescue:CONN_1 P3
 U 1 1 53221BE9
 P 6400 1500
 F 0 "P3" H 6480 1500 40  0000 L CNN
@@ -282,7 +251,7 @@ F 3 "" H 6400 1500 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L GND #PWR09
+L clk-command-rescue:GND #PWR09
 U 1 1 532220B3
 P 4400 5300
 F 0 "#PWR09" H 4400 5300 30  0001 C CNN
@@ -293,7 +262,7 @@ F 3 "" H 4400 5300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_1 P2
+L clk-command-rescue:CONN_1 P2
 U 1 1 53217460
 P 6400 1650
 F 0 "P2" H 6480 1650 40  0000 L CNN
@@ -310,21 +279,21 @@ Wire Wire Line
 Wire Wire Line
 	4350 1150 4350 1400
 Wire Wire Line
-	4350 1800 4350 2850
+	4350 1800 4350 1850
 Wire Wire Line
 	4350 2850 4550 2850
 Connection ~ 4350 2550
 Wire Wire Line
 	5250 2850 5050 2850
 Wire Wire Line
-	5250 1800 5250 2850
+	5250 1800 5250 1850
 Connection ~ 5250 2550
 Wire Wire Line
 	6500 2550 6650 2550
 Wire Wire Line
-	5750 900  6250 900 
+	5750 900  5950 900 
 Wire Wire Line
-	5800 1500 6250 1500
+	5800 1500 5950 1500
 Wire Wire Line
 	5100 1850 5250 1850
 Connection ~ 5250 1850
@@ -336,10 +305,10 @@ Wire Wire Line
 Wire Wire Line
 	6000 2300 6000 2450
 Wire Wire Line
-	6250 1400 6250 1650
+	6250 1400 6250 1500
 Connection ~ 6250 900 
 Wire Wire Line
-	4400 3600 4400 5300
+	4400 3600 4400 4150
 Connection ~ 4400 4150
 Connection ~ 4400 4700
 Connection ~ 4400 5150
@@ -347,7 +316,7 @@ Wire Wire Line
 	6250 900  6250 800 
 Connection ~ 6250 1500
 $Comp
-L C C3
+L clk-command-rescue:C C3
 U 1 1 53230A66
 P 5950 1200
 F 0 "C3" H 5950 1300 40  0000 L CNN
@@ -363,4 +332,24 @@ Connection ~ 5950 900
 Wire Wire Line
 	5950 1400 5950 1500
 Connection ~ 5950 1500
+Wire Wire Line
+	4350 2550 4350 2850
+Wire Wire Line
+	5250 2550 5250 2850
+Wire Wire Line
+	5250 1850 5250 2550
+Wire Wire Line
+	4350 1850 4350 2550
+Wire Wire Line
+	4400 4150 4400 4700
+Wire Wire Line
+	4400 4700 4400 5150
+Wire Wire Line
+	4400 5150 4400 5300
+Wire Wire Line
+	6250 1500 6250 1650
+Wire Wire Line
+	5950 900  6250 900 
+Wire Wire Line
+	5950 1500 6250 1500
 $EndSCHEMATC

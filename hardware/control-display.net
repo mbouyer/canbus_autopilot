@@ -255,13 +255,13 @@
         (pin (num 2) (name 2) (type passive)))))
   (libraries
     (library (logical LCDdisplays)
-      (uri /home/bouyer/kicad/libraries/LCDdisplays.lib))
+      (uri ${USERMOD}/LCDdisplays.lib))
     (library (logical texas-local)
-      (uri /home/bouyer/kicad/libraries/texas-local.lib))
+      (uri ${USERMOD}/texas-local.lib))
     (library (logical conn)
-      (uri /usr/pkg/share/kicad/library/conn.lib))
+      (uri ${KICAD_SYMBOL_DIR}/conn.lib))
     (library (logical device)
-      (uri /usr/pkg/share/kicad/library/device.lib)))
+      (uri ${KICAD_SYMBOL_DIR}/device.lib)))
   (nets
     (net (code 1) (name "")
       (node (ref DISPLAY1) (pin 20))

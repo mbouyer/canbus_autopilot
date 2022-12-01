@@ -416,11 +416,11 @@
         (pin (num 3) (name VO) (type power_out)))))
   (libraries
     (library (logical Connector)
-      (uri /usr/pkg/share/kicad/library/Connector.lib))
+      (uri ${KICAD_SYMBOL_DIR}/Connector.lib))
     (library (logical Device)
-      (uri /usr/pkg/share/kicad/library/Device.lib))
+      (uri ${KICAD_SYMBOL_DIR}/Device.lib))
     (library (logical Diode)
-      (uri /usr/pkg/share/kicad/library/Diode.lib))
+      (uri ${KICAD_SYMBOL_DIR}/Diode.lib))
     (library (logical remote-control-rescue)
       (uri /local/armandeche1/bouyer/nfs/kicad/autopilot/remote-control/remote-control-rescue.lib)))
   (nets

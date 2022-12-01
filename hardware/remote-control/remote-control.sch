@@ -1,6 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:remote-control-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -15,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L remote-control-rescue:MCP2562-capteur-rescue U2
+L remote-control-rescue:MCP2562-capteur-rescue-remote-control-rescue U2
 U 1 1 5D07804E
 P 6700 2250
 F 0 "U2" H 6300 2700 50  0000 L BNN
@@ -26,7 +25,7 @@ F 3 "~" H 6700 2250 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:PIC18F2xK80-capteur-rescue U1
+L remote-control-rescue:PIC18F2xK80-capteur-rescue-remote-control-rescue U1
 U 1 1 5D07804F
 P 5350 5450
 F 0 "U1" H 5450 6750 50  0000 L BNN
@@ -37,7 +36,7 @@ F 3 "~" H 5850 6300 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L remote-control-rescue:uA78M33-capteur-rescue U4
+L remote-control-rescue:uA78M33-capteur-rescue-remote-control-rescue U4
 U 1 1 5D078050
 P 8950 4900
 F 0 "U4" H 9100 4704 60  0000 C CNN
@@ -48,7 +47,7 @@ F 3 "" H 8950 4900 60  0000 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR014
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR014
 U 1 1 5D078051
 P 9350 4900
 F 0 "#PWR014" H 9350 4900 30  0001 C CNN
@@ -59,7 +58,7 @@ F 3 "" H 9350 4900 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:+12V #PWR012
+L remote-control-rescue:+12V-power #PWR012
 U 1 1 5D078052
 P 8900 4400
 F 0 "#PWR012" H 8900 4350 20  0001 C CNN
@@ -70,7 +69,7 @@ F 3 "" H 8900 4400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue #PWR013
+L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR013
 U 1 1 5D078053
 P 8900 5600
 F 0 "#PWR013" H 8900 5560 30  0001 C CNN
@@ -81,7 +80,7 @@ F 3 "" H 8900 5600 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L remote-control-rescue:C-RESCUE-capteur-capteur-rescue C4
+L remote-control-rescue:C-RESCUE-capteur-capteur-rescue-remote-control-rescue C4
 U 1 1 5D078054
 P 5250 6700
 F 0 "C4" H 5250 6800 40  0000 L CNN
@@ -92,7 +91,7 @@ F 3 "~" H 5250 6700 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue #PWR08
+L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR08
 U 1 1 5D078048
 P 6900 5450
 F 0 "#PWR08" H 6900 5410 30  0001 C CNN
@@ -103,7 +102,7 @@ F 3 "" H 6900 5450 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue #PWR09
+L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR09
 U 1 1 5D078056
 P 7350 2550
 F 0 "#PWR09" H 7350 2510 30  0001 C CNN
@@ -114,7 +113,7 @@ F 3 "" H 7350 2550 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR02
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR02
 U 1 1 5D078057
 P 4950 6750
 F 0 "#PWR02" H 4950 6750 30  0001 C CNN
@@ -125,7 +124,7 @@ F 3 "" H 4950 6750 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR04
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR04
 U 1 1 5D078058
 P 6700 3000
 F 0 "#PWR04" H 6700 3000 30  0001 C CNN
@@ -136,7 +135,7 @@ F 3 "" H 6700 3000 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+5V #PWR03
+L remote-control-rescue:+5V-power #PWR03
 U 1 1 5D078059
 P 6700 1550
 F 0 "#PWR03" H 6700 1640 20  0001 C CNN
@@ -147,7 +146,7 @@ F 3 "" H 6700 1550 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C6
+L remote-control-rescue:C_Small-Device-remote-control-rescue C6
 U 1 1 5D07805A
 P 7200 2750
 F 0 "C6" H 7200 2850 40  0000 L CNN
@@ -158,7 +157,7 @@ F 3 "~" H 7200 2750 60  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR07
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR07
 U 1 1 5D07805C
 P 6900 5150
 F 0 "#PWR07" H 6900 5150 30  0001 C CNN
@@ -175,7 +174,7 @@ PGC
 Text Label 6650 5250 0    60   ~ 0
 PGD
 $Comp
-L power:PWR_FLAG #PWR_PIC01
+L remote-control-rescue:PWR_FLAG-power #PWR_PIC01
 U 1 1 5D07805D
 P 6850 6350
 F 0 "#PWR_PIC01" H 6850 6445 30  0001 C CNN
@@ -186,7 +185,7 @@ F 3 "" H 6850 6350 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue C8
+L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue-remote-control-rescue C8
 U 1 1 5D07805F
 P 9100 5450
 F 0 "C8" H 9150 5550 50  0000 L CNN
@@ -197,7 +196,7 @@ F 3 "~" H 9100 5450 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue C2
+L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue-remote-control-rescue C2
 U 1 1 5D078060
 P 4700 6700
 F 0 "C2" H 4750 6800 50  0000 L CNN
@@ -208,7 +207,7 @@ F 3 "~" H 4700 6700 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L remote-control-rescue:CONN_6-capteur-rescue P1
+L remote-control-rescue:CONN_6-capteur-rescue-remote-control-rescue P1
 U 1 1 00000000
 P 7350 5300
 F 0 "P1" V 7300 5300 60  0000 C CNN
@@ -220,7 +219,7 @@ F 3 "" H 7350 5300 60  0000 C CNN
 $EndComp
 NoConn ~ 5450 4450
 $Comp
-L remote-control-rescue:uA78M05-capteur-rescue U5
+L remote-control-rescue:uA78M05-capteur-rescue-remote-control-rescue U5
 U 1 1 5D078038
 P 9800 4900
 F 0 "U5" H 9950 4704 60  0000 C CNN
@@ -231,7 +230,7 @@ F 3 "" H 9800 4900 60  0000 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR017
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR017
 U 1 1 5D078039
 P 10200 4900
 F 0 "#PWR017" H 10200 4900 30  0001 C CNN
@@ -242,7 +241,7 @@ F 3 "" H 10200 4900 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:+12V #PWR015
+L remote-control-rescue:+12V-power #PWR015
 U 1 1 5D07803A
 P 9750 4400
 F 0 "#PWR015" H 9750 4350 20  0001 C CNN
@@ -253,7 +252,7 @@ F 3 "" H 9750 4400 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue C9
+L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue-remote-control-rescue C9
 U 1 1 5D07802E
 P 9950 5450
 F 0 "C9" H 10000 5550 50  0000 L CNN
@@ -264,7 +263,7 @@ F 3 "~" H 9950 5450 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:+5V #PWR016
+L remote-control-rescue:+5V-power #PWR016
 U 1 1 5D07803C
 P 9750 5600
 F 0 "#PWR016" H 9750 5690 20  0001 C CNN
@@ -355,7 +354,7 @@ Wire Wire Line
 Wire Wire Line
 	8900 4400 8900 4500
 $Comp
-L remote-control-rescue:R-RESCUE-capteur-capteur-rescue R2
+L remote-control-rescue:R-RESCUE-capteur-capteur-rescue-remote-control-rescue R2
 U 1 1 5D078047
 P 7550 5200
 F 0 "R2" V 7630 5200 40  0000 C CNN
@@ -390,7 +389,7 @@ Wire Wire Line
 Wire Wire Line
 	7000 5150 7550 5150
 $Comp
-L Device:Crystal_Small Y1
+L remote-control-rescue:Crystal_Small-Device Y1
 U 1 1 5D0873A6
 P 4800 4300
 F 0 "Y1" H 4800 4400 50  0000 C CNN
@@ -401,7 +400,7 @@ F 3 "" H 4800 4300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:C_Small-Device C1
+L remote-control-rescue:C_Small-Device-remote-control-rescue C1
 U 1 1 5D089370
 P 4700 4000
 F 0 "C1" H 4500 4050 50  0000 L CNN
@@ -412,7 +411,7 @@ F 3 "" H 4700 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:C_Small-Device C3
+L remote-control-rescue:C_Small-Device-remote-control-rescue C3
 U 1 1 5D0896AC
 P 4900 4000
 F 0 "C3" H 4992 4046 50  0000 L CNN
@@ -423,7 +422,7 @@ F 3 "" H 4900 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR01
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR01
 U 1 1 5D08A8C6
 P 4800 3800
 F 0 "#PWR01" H 4800 3800 30  0001 C CNN
@@ -460,7 +459,7 @@ NoConn ~ 4250 4450
 NoConn ~ 4350 4450
 NoConn ~ 4450 4450
 $Comp
-L remote-control-rescue:ZPT-RFsol U3
+L remote-control-rescue:ZPT-RFsol-remote-control-rescue U3
 U 1 1 5D06B913
 P 7750 3750
 F 0 "U3" H 7750 4225 50  0000 C CNN
@@ -471,7 +470,7 @@ F 3 "" H 7600 3750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:C-RESCUE-capteur-capteur-rescue C5
+L remote-control-rescue:C-RESCUE-capteur-capteur-rescue-remote-control-rescue C5
 U 1 1 5D06C1C4
 P 6800 3700
 F 0 "C5" H 6800 3800 40  0000 L CNN
@@ -494,7 +493,7 @@ Wire Wire Line
 Wire Wire Line
 	7000 3900 6800 3900
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR06
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR06
 U 1 1 5D0711B2
 P 6800 3400
 F 0 "#PWR06" H 6800 3400 30  0001 C CNN
@@ -508,7 +507,7 @@ Wire Wire Line
 	6800 3400 6800 3500
 Connection ~ 6800 3500
 $Comp
-L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue #PWR05
+L remote-control-rescue:+3.3V-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR05
 U 1 1 5D0739C8
 P 6750 3900
 F 0 "#PWR05" H 6750 3860 30  0001 C CNN
@@ -529,7 +528,7 @@ NoConn ~ 8300 3500
 Wire Wire Line
 	5650 4200 5650 4450
 $Comp
-L Device:R_Small R1
+L remote-control-rescue:R_Small-Device R1
 U 1 1 5D06D0F4
 P 7150 4000
 F 0 "R1" H 7209 4046 50  0000 L CNN
@@ -540,7 +539,7 @@ F 3 "~" H 7150 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:LED D1
+L remote-control-rescue:LED-Device D1
 U 1 1 5D0700DD
 P 6950 4100
 F 0 "D1" H 6950 4000 50  0000 C CNN
@@ -561,7 +560,7 @@ Wire Wire Line
 Wire Wire Line
 	7150 4100 7100 4100
 $Comp
-L Connector:Conn_Coaxial J1
+L remote-control-rescue:Conn_Coaxial-Connector J1
 U 1 1 5D0839F1
 P 7200 3250
 F 0 "J1" V 7128 3351 50  0000 L CNN
@@ -646,7 +645,7 @@ Wire Wire Line
 Wire Wire Line
 	8450 1850 9200 1850
 $Comp
-L power:PWR_FLAG #U01
+L remote-control-rescue:PWR_FLAG-power #U01
 U 1 1 5D07803E
 P 7550 1450
 F 0 "#U01" H 7550 1545 30  0001 C CNN
@@ -657,7 +656,7 @@ F 3 "" H 7550 1450 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:D_Schottky_Small D2
+L remote-control-rescue:D_Schottky_Small-Device D2
 U 1 1 5D07803D
 P 7850 1550
 F 0 "D2" H 7850 1650 40  0000 C CNN
@@ -669,7 +668,7 @@ F 4 "PMEG4005EGWX" H 7850 1550 50  0001 C CNN "P/N"
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue C7
+L remote-control-rescue:CP1-RESCUE-capteur-capteur-rescue-remote-control-rescue C7
 U 1 1 5D07805E
 P 7550 1750
 F 0 "C7" H 7600 1850 50  0000 L CNN
@@ -680,7 +679,7 @@ F 3 "~" H 7550 1750 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+12V #PWR011
+L remote-control-rescue:+12V-power #PWR011
 U 1 1 5D07804D
 P 7450 1550
 F 0 "#PWR011" H 7450 1500 20  0001 C CNN
@@ -691,7 +690,7 @@ F 3 "" H 7450 1550 60  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue #PWR010
+L remote-control-rescue:GND-RESCUE-capteur-capteur-rescue-remote-control-rescue #PWR010
 U 1 1 5D07804C
 P 7400 1950
 F 0 "#PWR010" H 7400 1950 30  0001 C CNN
@@ -702,7 +701,7 @@ F 3 "" H 7400 1950 60  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L power:PWR_FLAG #U02
+L remote-control-rescue:PWR_FLAG-power #U02
 U 1 1 5D07804B
 P 8450 1450
 F 0 "#U02" H 8450 1545 30  0001 C CNN
@@ -713,7 +712,7 @@ F 3 "" H 8450 1450 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:PWR_FLAG #GND01
+L remote-control-rescue:PWR_FLAG-power #GND01
 U 1 1 5D07804A
 P 8150 1450
 F 0 "#GND01" H 8150 1545 30  0001 C CNN
@@ -732,7 +731,7 @@ GND
 Text Label 9050 1850 0    60   ~ 0
 12Vin
 $Comp
-L remote-control-rescue:CONN_4-capteur-rescue P2
+L remote-control-rescue:CONN_4-capteur-rescue-remote-control-rescue P2
 U 1 1 5D078049
 P 8800 2000
 F 0 "P2" V 8750 2000 50  0000 C CNN
@@ -744,7 +743,7 @@ F 4 "1770979" H 8800 2000 50  0001 C CNN "P/N"
 	1    0    0    -1  
 $EndComp
 $Comp
-L remote-control-rescue:CONN_4-capteur-rescue P3
+L remote-control-rescue:CONN_4-capteur-rescue-remote-control-rescue P3
 U 1 1 5D078055
 P 9550 2000
 F 0 "P3" V 9500 2000 50  0000 C CNN
@@ -758,7 +757,7 @@ $EndComp
 Wire Wire Line
 	4150 5050 7000 5050
 $Comp
-L Diode:1.5KExxA TVS1
+L remote-control-rescue:1.5KExxA-Diode TVS1
 U 1 1 5D0EC305
 P 8250 1750
 F 0 "TVS1" V 8204 1829 50  0000 L CNN

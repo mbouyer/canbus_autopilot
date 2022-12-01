@@ -1,5 +1,5 @@
-update=Thu Mar 13 22:06:46 2014
-last_client=pcbnew
+update=jeu. 01 déc. 2022 14:29:53 CET
+last_client=kicad
 [cvpcb]
 version=1
 NetIExt=net
@@ -36,3 +36,6 @@ LibName7=Pin_Arrays
 LibName8=Resistors_ThroughHole
 LibName9=Sockets
 LibName10=Sockets_DIP
+[eeschema]
+version=1
+LibDir=
